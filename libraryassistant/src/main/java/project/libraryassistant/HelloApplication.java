@@ -12,8 +12,7 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    private double x = 0;
-    private double y = 0;
+    
     @Override
     public void start(Stage stage) {
         try {
@@ -38,8 +37,7 @@ public class HelloApplication extends Application {
             e.printStackTrace(); // In lỗi ra console
         }
     }
-
     public static void main(String[] args) {
-        launch();
+        launch(args);
     }
 }
