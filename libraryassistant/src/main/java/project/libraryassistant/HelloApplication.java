@@ -12,9 +12,12 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 
 public class HelloApplication extends Application {
-    
+    private double x = 0;
+    private double y = 0;
     @Override
     public void start(Stage stage) {
+
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = fxmlLoader.load();
