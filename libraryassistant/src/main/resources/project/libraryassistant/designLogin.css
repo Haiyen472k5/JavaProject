@@ -1,0 +1,44 @@
+.login-form {
+    -fx-background-color: linear-gradient(to bottom right, #252d50, #324f6b);
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #f13f57;
+}
+
+.minimize {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.minimize:hover {
+    -fx-background-color: #A9A9A9;
+}
+
+.loin-button {
+    -fx-background-color: #468ec2;
+    -fx-cursor: hand;
+    -fx-background-radius: 15px;
+}
+
+.loin-button:hover {
+    -fx-background-color: #559bc9;
+}
+
+.text-field{
+    -fx-background-color: transparent;
+    -fx-text-fill: #fff;
+    -fx-font-size: 15px;
+    -fx-border-color: #fff;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+.text-filed:focused {
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
