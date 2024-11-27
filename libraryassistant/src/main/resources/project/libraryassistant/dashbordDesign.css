@@ -1,0 +1,62 @@
+.top-form {
+    -fx-background-color: #C3C7F4;
+}
+
+.close {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.close:hover {
+    -fx-background-color: #f13f57;
+}
+
+.minimize {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.minimize:hover {
+    -fx-background-color: #A9A9A9;
+}
+
+.left-form {
+    -fx-background-color: linear-gradient(to bottom right, #F4E7FB ,#F2DDDC);
+}
+
+.bt {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+
+}
+
+.bt:hover {
+    -fx-border-color: #F08080;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.bars {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.bars:hover {
+    -fx-background-radius: 5px;
+    -fx-background-color: #d6d6d6;
+}
+
+.edit-button {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+}
+
+.logout-button {
+    -fx-background-color: #F4E7FB;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+}
+
+.logout-button:hover {
+    -fx-background-color: #F2DDDC;
+    -fx-background-radius: 10px;
+}
