@@ -39,12 +39,12 @@
                               <Font name="Franklin Gothic Heavy Italic" size="25.0" />
                            </font>
                         </Label>
-                        <Button layoutX="1.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css">
+                        <Button fx:id="bars_btn" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" onAction="#sliderBars" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css" visible="false">
                            <graphic>
                               <FontAwesomeIconView glyphName="BARS" size="20" />
                            </graphic>
                         </Button>
-                        <Button layoutX="1.0" layoutY="30.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css">
+                        <Button fx:id="chevron_btn" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" onAction="#sliderArrow" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="CHEVRON_LEFT" size="20" textAlignment="CENTER" />
                            </graphic>
@@ -61,25 +61,25 @@
             </AnchorPane>
          </top>
          <left>
-            <AnchorPane prefHeight="603.0" prefWidth="185.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="591.0" prefWidth="189.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane prefHeight="602.6666666666666" prefWidth="189.33333333333334" styleClass="left-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="left_form" prefHeight="591.0" prefWidth="189.0" styleClass="left-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <Circle fx:id="circle_image" fill="#f8f0f0" layoutX="56.0" layoutY="61.0" radius="42.0" stroke="#a19898" strokeType="INSIDE" />
                         <Label layoutX="109.0" layoutY="44.0" text="Welcome" />
                         <Label layoutX="108.0" layoutY="61.0" text="username" />
                         <Line endX="50.33332824707031" endY="7.62939453125E-6" layoutX="113.0" layoutY="118.0" startX="-100.0" />
-                        <Button fx:id="home_page" layoutX="34.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Home page" textAlignment="RIGHT">
+                        <Button fx:id="home_page" layoutX="35.0" layoutY="154.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt_home_page" stylesheets="@dashbordDesign.css" text="Home page" textAlignment="RIGHT">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="manage_book" layoutX="34.0" layoutY="195.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage book" textAlignment="JUSTIFY">
+                        <Button fx:id="manage_book" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage book" textAlignment="JUSTIFY">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="manage_member" layoutX="34.0" layoutY="236.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage Member">
+                        <Button fx:id="manage_member" layoutX="35.0" layoutY="236.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage Member">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -123,9 +123,9 @@
             </AnchorPane>
          </left>
          <center>
-            <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <AnchorPane prefHeight="200.0" prefWidth="200.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="home_page_anchor" prefHeight="592.0" prefWidth="838.6666666666666" styleClass="semi-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="home_page_anchor" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="298.0" layoutY="141.0" prefHeight="220.0" prefWidth="503.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
                            <children>

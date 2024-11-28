@@ -1,5 +1,6 @@
 package project.libraryassistant;
 
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +14,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import javafx.animation.Transition.*;
 
 public class DashboardController {
     @FXML private Button close;
@@ -70,6 +73,15 @@ public class DashboardController {
     private Button return_book;
 
     @FXML
+    private AnchorPane left_form;
+
+    @FXML
+    private Button bars_btn;
+
+    @FXML
+    private Button chevron_btn;
+
+    @FXML
     private Button view_issued_book;
     private double x = 0;
     private double y = 0;
@@ -113,4 +125,47 @@ public class DashboardController {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
     }
+
+    @FXML
+    void sliderArrow() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(left_form);
+        slide.setToX(-189);
+        TranslateTransition slide2 = new TranslateTransition();
+        slide2.setDuration(Duration.seconds(.5));
+        slide2.setNode(home_page_anchor);
+        slide2.setToX(-189);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            bars_btn.setVisible(true);
+            chevron_btn.setVisible(false);
+        });
+
+        slide2.play();
+        slide.play();
+    }
+
+    @FXML
+    void sliderBars() {
+        TranslateTransition slide = new TranslateTransition();
+        slide.setDuration(Duration.seconds(.5));
+        slide.setNode(left_form);
+        slide.setToX(0);
+
+        TranslateTransition slide2 = new TranslateTransition();
+        slide2.setDuration(Duration.seconds(.5));
+        slide2.setNode(home_page_anchor);
+        slide2.setToX(0);
+
+        slide.setOnFinished((ActionEvent event) -> {
+            bars_btn.setVisible(false);
+            chevron_btn.setVisible(true);
+        });
+
+        slide2.play();
+        slide.play();
+
+    }
+
 }

@@ -79,3 +79,11 @@
     -fx-border-color: #000;
 }
 
+.bt_home_page {
+    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
+    -fx-cursor: hand;
+    -fx-text-fill:  #ededed;
+}
+
+
+
