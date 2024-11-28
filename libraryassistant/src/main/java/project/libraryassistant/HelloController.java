@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +41,8 @@ public class HelloController {
     public void exit() {
         System.exit(0);
     }
-
+    private double x = 0;
+    private double y = 0;
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet rs;
@@ -73,6 +76,17 @@ public class HelloController {
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
 
+                    root.setOnMousePressed((MouseEvent event) -> {
+                        x = event.getSceneX();
+                        y = event.getSceneY();
+                    });
+
+                    root.setOnMouseDragged((MouseEvent event) -> {
+                        stage.setX(event.getScreenX() - x);
+                        stage.setY(event.getScreenY() - y);
+                    });
+
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 } else {
@@ -90,5 +104,7 @@ public class HelloController {
         }
 
     }
+
+
 
 }

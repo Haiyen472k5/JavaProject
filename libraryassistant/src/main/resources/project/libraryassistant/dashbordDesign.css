@@ -1,5 +1,5 @@
 .top-form {
-    -fx-background-color: #C3C7F4;
+    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
 }
 
 .close {
@@ -21,7 +21,7 @@
 }
 
 .left-form {
-    -fx-background-color: linear-gradient(to bottom right, #F4E7FB ,#F2DDDC);
+    -fx-background-color: #ededed;
 }
 
 .bt {
@@ -31,8 +31,8 @@
 }
 
 .bt:hover {
-    -fx-border-color: #F08080;
-    -fx-border-width: 0px 0px 2px 0px;
+    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
+    -fx-text-fill : #ededed;
 }
 
 .bars {
@@ -51,8 +51,7 @@
 }
 
 .logout-button {
-    -fx-background-color: #F4E7FB;
-    -fx-background-radius: 10px;
+    -fx-background-color: transparent;
     -fx-cursor: hand;
 }
 
@@ -60,3 +59,23 @@
     -fx-background-color: #F2DDDC;
     -fx-background-radius: 10px;
 }
+
+.semi-form {
+    -fx-background-color: #ffff;
+    -fx-border-color: #000;
+    -fx-border-width: 0px 0px 1px 0px;
+}
+
+.statistic {
+    -fx-background-color: #ededed;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #000;
+    -fx-border-radius: 15px;
+}
+
+.card-item {
+    -fx-background-color: #fff;
+    -fx-border-color: #000;
+}
+
