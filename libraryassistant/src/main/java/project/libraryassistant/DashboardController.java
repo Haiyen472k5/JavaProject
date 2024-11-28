@@ -18,9 +18,6 @@ import javafx.util.Duration;
 import javafx.animation.Transition.*;
 
 public class DashboardController {
-    @FXML private Button close;
-
-    @FXML private Button minimize;
     @FXML
     private ImageView availableBook1_image;
 
@@ -29,6 +26,9 @@ public class DashboardController {
 
     @FXML
     private ImageView availableBook3_image;
+
+    @FXML
+    private Button bars_btn;
 
     @FXML
     private ImageView borrowedBook1_image;
@@ -40,7 +40,19 @@ public class DashboardController {
     private ImageView borrowedBook3_image;
 
     @FXML
+    private Button chevron_btn;
+
+    @FXML
+    private Circle circle_hl;
+
+    @FXML
     private Circle circle_image;
+
+    @FXML
+    private Button close;
+
+    @FXML
+    private AnchorPane half_left;
 
     @FXML
     private Button home_page;
@@ -49,16 +61,37 @@ public class DashboardController {
     private AnchorPane home_page_anchor;
 
     @FXML
+    private Button home_page_hl;
+
+    @FXML
     private Button issue_book;
+
+    @FXML
+    private Button issue_book_hl;
+
+    @FXML
+    private AnchorPane left_form;
 
     @FXML
     private Button logout_btn;
 
     @FXML
+    private Button logout_hl;
+
+    @FXML
     private Button manage_book;
 
     @FXML
+    private Button manage_book_hl;
+
+    @FXML
     private Button manage_member;
+
+    @FXML
+    private Button manage_member_hl;
+
+    @FXML
+    private Button minimize;
 
     @FXML
     private Label no_book;
@@ -73,21 +106,20 @@ public class DashboardController {
     private Button return_book;
 
     @FXML
-    private AnchorPane left_form;
+    private Button return_book_hl;
 
     @FXML
-    private Button bars_btn;
-
-    @FXML
-    private Button chevron_btn;
+    private Button view_book_hl;
 
     @FXML
     private Button view_issued_book;
+
+
     private double x = 0;
     private double y = 0;
 
-    @FXML
-    public void logout(ActionEvent event) {
+
+    public void logout_main(ActionEvent event, Button logout_btn) {
         try {
             if (event.getSource() == logout_btn) {
                 Parent root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
@@ -116,6 +148,15 @@ public class DashboardController {
     }
 
     @FXML
+    void logout(ActionEvent event) {
+        logout_main(event, logout_btn);
+    }
+
+    @FXML
+    void logout_hl(ActionEvent event) {
+        logout_main(event, logout_hl);
+    }
+    @FXML
     public void exit() {
         System.exit(0);
     }
@@ -135,13 +176,19 @@ public class DashboardController {
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
         slide2.setNode(home_page_anchor);
-        slide2.setToX(-189);
+        slide2.setToX(-189 + 130);
+
+        TranslateTransition slide3 = new TranslateTransition();
+        slide3.setDuration(Duration.seconds(.5));
+        slide3.setNode(half_left);
+        slide3.setToX(0);
 
         slide.setOnFinished((ActionEvent event) -> {
             bars_btn.setVisible(true);
             chevron_btn.setVisible(false);
         });
 
+        slide3.play();
         slide2.play();
         slide.play();
     }
@@ -158,11 +205,18 @@ public class DashboardController {
         slide2.setNode(home_page_anchor);
         slide2.setToX(0);
 
+        TranslateTransition slide3 = new TranslateTransition();
+        slide3.setDuration(Duration.seconds(.5));
+        slide3.setNode(half_left);
+        slide3.setToX(-101);
+
         slide.setOnFinished((ActionEvent event) -> {
             bars_btn.setVisible(false);
             chevron_btn.setVisible(true);
+
         });
 
+        slide3.play();
         slide2.play();
         slide.play();
 

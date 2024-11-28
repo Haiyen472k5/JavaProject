@@ -31,8 +31,7 @@
 }
 
 .bt:hover {
-    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
-    -fx-text-fill : #ededed;
+    -fx-text-fill: #7BA0FF;
 }
 
 .bars {
@@ -62,8 +61,7 @@
 
 .semi-form {
     -fx-background-color: #ffff;
-    -fx-border-color: #000;
-    -fx-border-width: 0px 0px 1px 0px;
+
 }
 
 .statistic {
@@ -83,6 +81,15 @@
     -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
     -fx-cursor: hand;
     -fx-text-fill:  #ededed;
+}
+
+.bt_half_left {
+    -fx-background-color: #fff;
+    -fx-cursor: hand;
+}
+
+.bt_half_left:hover {
+    -fx-background-color: #7BA0FF;
 }
 
 
