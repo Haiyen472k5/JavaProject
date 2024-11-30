@@ -1,0 +1,58 @@
+.detail_member {
+    -fx-background-color: #ffff;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+    -fx-border-color: #000;
+}
+
+.member_board {
+    -fx-background-color: #ffff;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-color: #000;
+}
+
+.search_field {
+    -fx-background-color: #ffff;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000;
+    -fx-text-fill: #000;
+    -fx-font-size: 12px;
+}
+
+.search_btn {
+    -fx-background-color: #ffff;
+    -fx-border-width: 1px 1px 1px 1px;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-border-color: #000;
+    -fx-cursor: hand;
+}
+
+.search_btn:hover {
+    -fx-background-color: #F2DDDC;
+}
+
+.text_info {
+    -fx-background-color: transparent;
+    -fx-border-width: 0px 0px 1px 0px;
+    -fx-border-color: #000;
+    -fx-text-fill: #000;
+    -fx-font-size: 17px;
+}
+
+.text_info:focused {
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+.btn_member {
+    -fx-cursor: hand;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
+}
+
+.btn_member:hover {
+    -fx-background-color: #888DF2;
+}

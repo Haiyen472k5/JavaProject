@@ -1,5 +1,7 @@
 package project.libraryassistant;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -59,6 +61,9 @@ public class DashboardController {
 
     @FXML
     private AnchorPane home_page_anchor;
+
+    @FXML
+    private AnchorPane center_form;
 
     @FXML
     private Button home_page_hl;
@@ -175,7 +180,7 @@ public class DashboardController {
         slide.setToX(-189);
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
-        slide2.setNode(home_page_anchor);
+        slide2.setNode(center_form);
         slide2.setToX(-189 + 130);
 
         TranslateTransition slide3 = new TranslateTransition();
@@ -202,7 +207,7 @@ public class DashboardController {
 
         TranslateTransition slide2 = new TranslateTransition();
         slide2.setDuration(Duration.seconds(.5));
-        slide2.setNode(home_page_anchor);
+        slide2.setNode(center_form);
         slide2.setToX(0);
 
         TranslateTransition slide3 = new TranslateTransition();

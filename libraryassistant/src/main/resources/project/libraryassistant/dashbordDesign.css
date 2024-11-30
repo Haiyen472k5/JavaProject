@@ -31,7 +31,8 @@
 }
 
 .bt:hover {
-    -fx-text-fill: #7BA0FF;
+    -fx-text-fill: #ffff;
+    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
 }
 
 .bars {
@@ -77,11 +78,7 @@
     -fx-border-color: #000;
 }
 
-.bt_home_page {
-    -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
-    -fx-cursor: hand;
-    -fx-text-fill:  #ededed;
-}
+
 
 .bt_half_left {
     -fx-background-color: #fff;
