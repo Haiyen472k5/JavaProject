@@ -1,5 +1,6 @@
 .login-form {
-    -fx-background-color: linear-gradient(to bottom right, #252d50, #324f6b);
+    -fx-background-image: url("/‌image/loginbg.png");
+    -fx-background-size: 100% 100%;
 }
 
 .close {
@@ -32,13 +33,21 @@
 
 .text-field{
     -fx-background-color: transparent;
-    -fx-text-fill: #fff;
+    -fx-text-fill: #000;
     -fx-font-size: 15px;
-    -fx-border-color: #fff;
+    -fx-border-color: #000;
     -fx-border-width: 0px 0px 1px 0px;
 }
 
 .text-filed:focused {
     -fx-border-width: 0px 0px 2px 0px;
 }
+
+.signup_btn {
+    -fx-background-color: #DC586D;
+    -fx-background-radius: 15px;
+    -fx-cursor: hand;
+}
+
+
 

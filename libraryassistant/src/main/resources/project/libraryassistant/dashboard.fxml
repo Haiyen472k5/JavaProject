@@ -371,7 +371,7 @@
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <children>
-                              <Label layoutX="58.0" layoutY="90.0" text="Enter Student ID">
+                              <Label layoutX="58.0" layoutY="90.0" text="Enter Student ID" AnchorPane.leftAnchor="61.0">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
@@ -387,7 +387,7 @@
                                     <Font name="Berlin Sans FB Demi Bold" size="23.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="60.0" layoutY="170.0" text="Enter Name">
+                              <Label layoutX="60.0" layoutY="170.0" text="Enter Name" AnchorPane.leftAnchor="61.0">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
@@ -398,7 +398,7 @@
                                  </font>
                               </TextField>
                               <FontAwesomeIconView glyphName="USER" layoutX="31.0" layoutY="223.0" size="30" />
-                              <Label layoutX="61.0" layoutY="250.0" text="Enter university">
+                              <Label layoutX="61.0" layoutY="250.0" text="Enter university" AnchorPane.leftAnchor="61.0">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
@@ -409,7 +409,7 @@
                                  </font>
                               </TextField>
                               <FontAwesomeIconView glyphName="BUILDING" layoutX="29.0" layoutY="303.0" size="30" />
-                              <Label layoutX="58.0" layoutY="330.0" text="Enter faculty">
+                              <Label layoutX="58.0" layoutY="330.0" text="Enter faculty" AnchorPane.leftAnchor="61.0">
                                  <font>
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
@@ -437,8 +437,8 @@
                                 <columns>
                                   <TableColumn prefWidth="95.33331036567688" text="Student ID" />
                                   <TableColumn prefWidth="135.3333511352539" text="Name" />
-                                    <TableColumn prefWidth="135.99998474121094" text="University" />
-                                    <TableColumn prefWidth="101.33331298828125" text="Faculty" />
+                                    <TableColumn prefWidth="90.66667175292969" text="University" />
+                                    <TableColumn prefWidth="146.6666259765625" text="Faculty" />
                                 </columns>
                               </TableView>
                            </children>

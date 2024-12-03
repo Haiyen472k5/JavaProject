@@ -8,27 +8,76 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" styleClass="login-form" stylesheets="@designLogin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryassistant.HelloController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="650.0" styleClass="login-form" stylesheets="@designLogin.css" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryassistant.HelloController">
    <children>
-      <FontAwesomeIconView fill="WHITE" glyphName="BOOK" layoutX="126.0" layoutY="102.0" size="50" />
-      <Label layoutX="75.0" layoutY="106.0" prefHeight="43.0" prefWidth="164.0" text="Library" textFill="WHITE">
-         <font>
-            <Font name="Lucida Calligraphy Italic" size="35.0" />
-         </font>
-      </Label>
-      <TextField fx:id="username" layoutX="58.0" layoutY="173.0" prefHeight="25.0" prefWidth="183.0" promptText="Username" styleClass="text-filed" stylesheets="@designLogin.css" />
-      <Button fx:id="login_btn" layoutX="113.0" layoutY="257.0" mnemonicParsing="false" onAction="#login" prefHeight="22.0" prefWidth="65.0" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="#ffebeb">
-         <font>
-            <Font name="Berlin Sans FB Demi Bold" size="15.0" />
-         </font>
-      </Button>
-      <Button fx:id="close" layoutX="250.0" mnemonicParsing="false" onAction="#exit" prefWidth="50.0" styleClass="close" stylesheets="@designLogin.css">
+      <AnchorPane layoutX="364.6666564941406" layoutY="31.66666603088379" prefHeight="433.0" prefWidth="275.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0">
+         <children>
+            <AnchorPane prefHeight="433.0" prefWidth="275.0" AnchorPane.leftAnchor="0.0">
+               <children>
+                  <FontAwesomeIconView glyphName="BOOK" layoutX="120.0" layoutY="89.0" size="50" />
+                  <Label layoutX="68.0" layoutY="96.0" prefHeight="43.0" prefWidth="164.0" text="Library" textFill="#7d000a">
+                     <font>
+                        <Font name="Lucida Calligraphy Italic" size="35.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="username" layoutX="51.0" layoutY="164.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <Button fx:id="login_btn" layoutX="101.0" layoutY="247.0" mnemonicParsing="false" onAction="#login" prefHeight="28.0" prefWidth="85.0" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <PasswordField fx:id="password" layoutX="52.0" layoutY="199.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <Label layoutX="34.0" layoutY="299.0" text="Don't have an account?">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="193.0" layoutY="295.0" mnemonicParsing="false" styleClass="signup_btn" stylesheets="@designLogin.css" text="Sign up" textFill="#fff4f4">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="14.0" layoutY="51.0" prefHeight="433.3333333333333" prefWidth="285.3333333333333" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label layoutX="68.0" layoutY="96.0" prefHeight="43.0" prefWidth="164.0" text="Library" textFill="#7d000a">
+                     <font>
+                        <Font name="Lucida Calligraphy Italic" size="35.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="username1" layoutX="50.0" layoutY="162.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <PasswordField fx:id="password1" layoutX="51.0" layoutY="197.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <TextField fx:id="username11" layoutX="51.0" layoutY="236.0" prefHeight="25.0" prefWidth="183.0" promptText="Username" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <FontAwesomeIconView glyphName="BOOK" layoutX="120.0" layoutY="89.0" size="50" />
+                  <Button layoutX="106.0" layoutY="281.0" mnemonicParsing="false" styleClass="signup_btn" stylesheets="@designLogin.css" text="Register" textFill="WHITE">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                     </font>
+                  </Button>
+                  <Label layoutX="51.0" layoutY="333.0" text="Have an account?" textFill="#070606">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="176.0" layoutY="329.0" mnemonicParsing="false" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="#fffdfd">
+                     <font>
+                        <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                     </font>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Button fx:id="close" layoutX="600.0" mnemonicParsing="false" onAction="#exit" prefWidth="50.0" styleClass="close" stylesheets="@designLogin.css">
          <graphic>
             <FontAwesomeIconView glyphName="CLOSE" size="13" />
          </graphic>
       </Button>
-      <Button fx:id="minimize" layoutX="200.0" layoutY="-1.0" mnemonicParsing="false" onAction="#minimize" prefWidth="50.0" styleClass="minimize" stylesheets="@designLogin.css" />
-      <PasswordField fx:id="password" layoutX="59.0" layoutY="208.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" styleClass="text-filed" stylesheets="@designLogin.css" />
-      <FontAwesomeIconView glyphName="MINUS" layoutX="219.0" layoutY="18.0" size="13" />
+      <Button fx:id="minimize" layoutX="547.0" mnemonicParsing="false" onAction="#minimize" prefWidth="50.0" styleClass="minimize" stylesheets="@designLogin.css" AnchorPane.rightAnchor="50.0">
+         <graphic>
+            <FontAwesomeIconView glyphName="MINUS" size="13" text="" />
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>
