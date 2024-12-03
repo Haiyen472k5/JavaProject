@@ -6,8 +6,7 @@ import java.sql.SQLException;
 
 public class Database {
     private static final String URL = "jdbc:mysql://localhost:3307/login"; // Thay bằng URL của bạn
-    private static final String USER = "root"; // Tên người dùng MySQL
-
+    private static final String USER = "root"; // Tên người dùng MySQ
     public static Connection getConnection() {
         Connection connection = null;
         try {
