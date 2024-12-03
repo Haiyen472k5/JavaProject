@@ -282,11 +282,11 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="mange_book_anchor" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="mange_book_anchor" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                        <AnchorPane layoutX="308.0" layoutY="72.0" prefHeight="509.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
                            <children>
-                              <TableView fx:id="book_table" layoutX="1.6666666666666665" layoutY="9.333333333333334" prefHeight="571.0" prefWidth="512.0" styleClass="board_manage" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="book_table" layoutX="1.6666666666666665" layoutY="16.0" prefHeight="495.0" prefWidth="512.0" styleClass="board_manage" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="col_book_id" prefWidth="44.22223150730133" text="ID" />
                                   <TableColumn fx:id="col_book_titile" minWidth="0.0" prefWidth="147.33338165283203" text="Title" />
@@ -367,7 +367,7 @@
                         <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.666717529296875" startY="-169.44448852539062" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <children>
@@ -479,6 +479,12 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
+                  <TextField layoutX="364.0" layoutY="30.0" promptText="Book ID" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="20.0" />
+                  <Button layoutX="519.0" layoutY="31.0" mnemonicParsing="false" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="20.0">
+                     <graphic>
+                        <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
+                     </graphic>
+                  </Button>
                </children>
             </AnchorPane>
          </center>
