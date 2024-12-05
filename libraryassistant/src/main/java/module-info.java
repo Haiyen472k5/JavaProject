@@ -11,6 +11,7 @@ module project.libraryassistant {
     requires eu.hansolo.tilesfx;
     requires java.desktop;
     requires java.sql;
+    requires org.json;
 
     opens project.libraryassistant to javafx.fxml;
     exports project.libraryassistant;

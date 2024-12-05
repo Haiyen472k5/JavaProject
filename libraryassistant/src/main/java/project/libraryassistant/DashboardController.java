@@ -3,12 +3,15 @@ package project.libraryassistant;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.animation.TranslateTransition;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -22,6 +25,8 @@ import javafx.animation.Transition.*;
 public class DashboardController {
     @FXML
     private ImageView availableBook1_image;
+
+
 
     @FXML
     private ImageView availableBook2_image;
@@ -119,9 +124,16 @@ public class DashboardController {
     @FXML
     private Button view_issued_book;
 
+    @FXML
+    private ComboBox<String> university;
 
     private double x = 0;
     private double y = 0;
+    private String[] uni = {"UET", "ULIS", "UEB", "UEd", "VJU", "UL", "HUS", "UMP", "IS", "SIS"};
+    public void initialize() {
+        university.getItems().addAll(uni);
+
+    }
 
 
     public void logout_main(ActionEvent event, Button logout_btn) {
@@ -227,4 +239,5 @@ public class DashboardController {
 
     }
 
+    
 }

@@ -4,6 +4,7 @@
 <?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -282,7 +283,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="mange_book_anchor" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="mange_book_anchor" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="308.0" layoutY="72.0" prefHeight="509.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="307.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="60.0">
                            <children>
@@ -291,7 +292,7 @@
                                   <TableColumn fx:id="col_book_id" prefWidth="44.22223150730133" text="ID" />
                                   <TableColumn fx:id="col_book_titile" minWidth="0.0" prefWidth="147.33338165283203" text="Title" />
                                     <TableColumn fx:id="col_book_author" minWidth="3.3333740234375" prefWidth="133.111083984375" text="Author" />
-                                    <TableColumn fx:id="col_book_genre" prefWidth="114.888916015625" text="Genre" />
+                                    <TableColumn fx:id="col_book_subject" prefWidth="114.888916015625" text="Subject" />
                                     <TableColumn fx:id="col_book_quantity" prefWidth="72.2222900390625" text="Quantity" />
                                 </columns>
                               </TableView>
@@ -326,7 +327,7 @@
                                     <Insets left="10.0" />
                                  </padding>
                               </TextField>
-                              <TextField fx:id="genre_book" layoutX="48.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" promptText="Genre" AnchorPane.leftAnchor="38.0">
+                              <TextField fx:id="genre_book" layoutX="48.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" promptText="Subject" AnchorPane.leftAnchor="38.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -365,9 +366,15 @@
                               <FontAwesomeIconView glyphName="CALCULATOR" layoutX="16.0" layoutY="423.0" size="21" AnchorPane.leftAnchor="12.0" />
                            </children></AnchorPane>
                         <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.666717529296875" startY="-169.44448852539062" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
+                        <TextField promptText="Book ID" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="20.0" />
+                        <Button mnemonicParsing="false" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="20.0">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <children>
@@ -392,7 +399,7 @@
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="58.0" layoutY="190.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
+                              <TextField layoutX="58.0" layoutY="190.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.leftAnchor="57.33333333333334" AnchorPane.rightAnchor="16.0">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
@@ -403,11 +410,6 @@
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField layoutX="59.0" layoutY="270.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </TextField>
                               <FontAwesomeIconView glyphName="BUILDING" layoutX="29.0" layoutY="303.0" size="30" />
                               <Label layoutX="58.0" layoutY="330.0" text="Enter faculty" AnchorPane.leftAnchor="61.0">
                                  <font>
@@ -430,6 +432,7 @@
                                     <Font size="15.0" />
                                  </font>
                               </Button>
+                              <ComboBox fx:id="university" layoutX="63.0" layoutY="280.0" prefHeight="30.0" prefWidth="233.0" promptText="Select University" AnchorPane.leftAnchor="57.33333333333334" AnchorPane.rightAnchor="16.0" />
                            </children></AnchorPane>
                         <AnchorPane layoutX="405.0" layoutY="77.0" prefHeight="286.0" prefWidth="461.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0">
                            <children>
@@ -479,12 +482,6 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <TextField layoutX="364.0" layoutY="30.0" promptText="Book ID" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.leftAnchor="307.0" AnchorPane.topAnchor="20.0" />
-                  <Button layoutX="519.0" layoutY="31.0" mnemonicParsing="false" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.leftAnchor="460.0" AnchorPane.topAnchor="20.0">
-                     <graphic>
-                        <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
-                     </graphic>
-                  </Button>
                </children>
             </AnchorPane>
          </center>
