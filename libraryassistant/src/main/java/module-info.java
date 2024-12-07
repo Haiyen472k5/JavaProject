@@ -11,7 +11,8 @@ module project.libraryassistant {
     requires eu.hansolo.tilesfx;
     requires java.desktop;
     requires java.sql;
-
+    requires com.fasterxml.jackson.databind;
+    requires okhttp3;
     opens project.libraryassistant to javafx.fxml;
     exports project.libraryassistant;
 

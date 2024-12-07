@@ -114,3 +114,7 @@
     -fx-border-radius: 15px;
 }
 
+.searchbox {
+    -fx-border-color: #000;
+    -fx-border-radius: 25px;
+}
