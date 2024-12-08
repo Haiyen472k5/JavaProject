@@ -181,7 +181,7 @@
          <center>
             <AnchorPane fx:id="center_form" prefHeight="200.0" prefWidth="200.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="home_page_form" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="home_page_form" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="298.0" layoutY="141.0" prefHeight="220.0" prefWidth="503.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
                            <children>
@@ -281,7 +281,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="add_book_form" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="add_book_form" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
                            <children>
@@ -544,11 +544,16 @@
                               <Label layoutX="20.0" layoutY="400.0" text="Issue Date:" />
                               <Label layoutX="20.0" layoutY="435.0" text="Due Date:" />
                               <Label layoutX="20.0" layoutY="365.0" text="Student Name:" />
-                              <FontAwesomeIconView glyphName="BOOK" layoutX="35.0" layoutY="42.0" size="25" text=" Issued Book Detail" wrappingWidth="224.83062744140625" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="47.0" layoutY="57.0" size="25" text=" " wrappingWidth="35.49732971191406" />
                               <TextField layoutX="87.0" layoutY="325.0" prefHeight="26.0" prefWidth="159.0" AnchorPane.rightAnchor="22.0" />
                               <TextField layoutX="112.0" layoutY="360.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="21.0" />
                               <TextField layoutX="92.0" layoutY="395.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="22.0" />
                               <TextField layoutX="97.0" layoutY="430.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="21.0" />
+                              <Label layoutX="69.0" layoutY="34.0" prefHeight="25.0" prefWidth="225.0" text=" Issued Book Detail">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="20.0" />
+                                 </font>
+                              </Label>
                            </children>
                         </AnchorPane>
                         <AnchorPane layoutX="350.0" layoutY="75.0" prefHeight="500.0" prefWidth="464.0" styleClass="issuebookbar">

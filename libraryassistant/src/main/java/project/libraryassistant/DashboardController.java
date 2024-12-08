@@ -678,7 +678,7 @@ public class DashboardController {
         current_form_label.setText("Home Page");
 
 
-
+        
 
         // Kết nối các cột trong bảng với thuộc tính của đối tượng Book
         col_book_id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -761,6 +761,7 @@ public class DashboardController {
             title_book.setText(firstBook.path("title").asText());
             author_book.setText(firstBook.path("authors").toString());
             genre_book.setText(firstBook.path("categories").isMissingNode() ? "Unknown" : firstBook.path("categories").get(0).asText());
+
             quantity_book.setText("5"); // Mặc định số lượng là 5
             id_book.setText(firstBook.path("id").asText());
 
@@ -778,6 +779,7 @@ public class DashboardController {
                         : volumeInfo.path("authors").toString();
                 String genre = volumeInfo.path("categories").isMissingNode() ? "Unknown Genre"
                         : volumeInfo.path("categories").get(0).asText();
+
                 int quantity = 5; // Default value
                 String coverImageUrl = volumeInfo.path("imageLinks").path("thumbnail").asText(""); // Lấy URL ảnh bìa
 
