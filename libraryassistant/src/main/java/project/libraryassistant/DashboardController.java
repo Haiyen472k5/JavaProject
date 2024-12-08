@@ -359,6 +359,7 @@ public class DashboardController {
 
         try {
             // Gọi Google Books API
+            bookList.clear();
             String jsonResponse = fetchBooksFromGoogleAPI(keyword);
 
             // Phân tích dữ liệu JSON trả về
@@ -378,11 +379,14 @@ public class DashboardController {
             title_book.setText(firstBook.path("title").asText());
             author_book.setText(firstBook.path("authors").toString());
             genre_book.setText(firstBook.path("categories").isMissingNode() ? "Unknown" : firstBook.path("categories").get(0).asText());
-            quantity_book.setText("1"); // Mặc định số lượng là 1
+            quantity_book.setText("5"); // Mặc định số lượng là 5
+            id_book.setText(firstBook.path("id").asText());
 
             // Hiển thị thông báo
+            /*
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book details filled successfully.");
             alert.show();
+            */
 
             for (JsonNode item : items) {
                 JsonNode volumeInfo = item.path("volumeInfo");
@@ -392,7 +396,7 @@ public class DashboardController {
                         : volumeInfo.path("authors").toString();
                 String genre = volumeInfo.path("categories").isMissingNode() ? "Unknown Genre"
                         : volumeInfo.path("categories").get(0).asText();
-                int quantity = 1; // Default value
+                int quantity = 5; // Default value
                 String coverImageUrl = volumeInfo.path("imageLinks").path("thumbnail").asText(""); // Lấy URL ảnh bìa
 
                 bookList.add(new Book(id, title, author, genre, quantity, coverImageUrl));
