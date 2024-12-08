@@ -1,8 +1,6 @@
 package project.libraryassistant;
 
-import javafx.scene.image.Image;
-
-public class manageBook {
+public class Book {
     private final String id;
     private final String title;
     private final String author;
@@ -10,7 +8,7 @@ public class manageBook {
     private final int quantity;
     private final String coverImage;
 
-    public manageBook(String id, String title, String author, String genre, int quantity, String coverUrl) {
+    public Book(String id, String title, String author, String genre, int quantity, String coverUrl) {
         this.id = id;
         this.title = title;
         this.author = author;
