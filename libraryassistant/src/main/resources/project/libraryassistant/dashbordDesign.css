@@ -31,8 +31,13 @@
 }
 
 .bt:hover {
-    -fx-text-fill: #ffff;
+    -fx-text-fill: #fff;
     -fx-background-color: linear-gradient(to bottom right, #7BA0FF ,#8657C0);
+}
+
+.bt_active {
+    -fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);
+    -fx-text-fill: #fff;
 }
 
 .bars {
@@ -87,6 +92,10 @@
 
 .bt_half_left:hover {
     -fx-background-color: #7BA0FF;
+}
+
+.bt_half_left_active {
+    -fx-background-color:linear-gradient(to bottom right, #344275, #3a6389);
 }
 
 .issuebookbar {
