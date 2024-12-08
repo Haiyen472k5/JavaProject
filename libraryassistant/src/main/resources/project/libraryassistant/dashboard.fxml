@@ -181,7 +181,7 @@
          <center>
             <AnchorPane fx:id="center_form" prefHeight="200.0" prefWidth="200.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
                <children>
-                  <AnchorPane fx:id="home_page_form" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="home_page_form" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="298.0" layoutY="141.0" prefHeight="220.0" prefWidth="503.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
                            <children>
@@ -367,6 +367,7 @@
                         <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.66668701171875" startY="-188.74403381347656" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
                      </children>
                   </AnchorPane>
+
                   <AnchorPane fx:id="manage_student_form" layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
@@ -475,129 +476,7 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0" visible="false">
-                     <children>
-                        <AnchorPane layoutX="35.0" layoutY="14.0" prefHeight="302.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css">
-                           <children>
-                              <Label layoutX="25.0" layoutY="30.0" text="Issue ID">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="25.0" layoutY="68.0" text="Member Name">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="25.0" layoutY="108.0" text="Book ID/Title">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="25.0" layoutY="151.0" text="Issue Date">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="25.0" layoutY="191.0" text="Due Date">
-                                 <font>
-                                    <Font size="16.0" />
-                                 </font>
-                              </Label>
-                              <TextField layoutX="156.0" layoutY="30.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue ID" />
-                              <TextField layoutX="156.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" promptText="Member Name" />
-                              <TextField layoutX="156.0" layoutY="108.0" prefHeight="26.0" prefWidth="290.0" promptText="Book ID/Name" />
-                              <TextField layoutX="156.0" layoutY="151.0" prefHeight="26.0" prefWidth="223.0" promptText="DD/MM/YY" />
-                              <TextField layoutX="156.0" layoutY="191.0" prefHeight="26.0" prefWidth="224.0" promptText="DD/MM/YY" />
-                              <Button defaultButton="true" layoutX="392.0" layoutY="148.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
-                                 </graphic>
-                              </Button>
-                              <Button defaultButton="true" layoutX="392.0" layoutY="189.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <graphic>
-                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
-                                 </graphic>
-                              </Button>
-                              <Button layoutX="138.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Insert" />
-                              <Button layoutX="211.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Update" />
-                              <Button layoutX="284.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Delete" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="573.0" layoutY="26.0" prefHeight="258.0" prefWidth="239.0" />
-                        <AnchorPane layoutX="34.0" layoutY="345.0" prefHeight="214.0" prefWidth="522.0">
-                           <children>
-                              <TableView layoutY="1.0" prefHeight="214.0" prefWidth="522.0" styleClass="issuebookbar">
-                                 <columns>
-                                    <TableColumn prefWidth="75.0" text="Issue ID" />
-                                    <TableColumn prefWidth="108.80004119873047" text="Student Name" />
-                                    <TableColumn prefWidth="127.19992065429688" text="Book" />
-                                    <TableColumn prefWidth="104.79998779296875" text="Issue Date" />
-                                    <TableColumn prefWidth="111.20004272460938" text="Due Date" />
-                                 </columns>
-                              </TableView>
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="573.0" layoutY="14.0" prefHeight="546.0" prefWidth="239.0" styleClass="issuebookbar">
-                           <children>
-                              <Pane layoutX="53.0" layoutY="76.0" prefHeight="165.0" prefWidth="133.0" styleClass="issuebookbar">
-                                 <children>
-                                    <ImageView fitHeight="150.0" fitWidth="118.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
-                                 </children>
-                              </Pane>
-                              <Label layoutX="86.0" layoutY="254.0" text="Book name" />
-                              <Label layoutX="20.0" layoutY="295.0" text="Book ID:" />
-                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
-                              <Label layoutX="20.0" layoutY="400.0" text="Genre:" />
-                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
-                              <Label layoutX="20.0" layoutY="365.0" text="Author:" />
-                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="121.0" text="Book Detail">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <Label layoutX="86.0" layoutY="296.0" />
-                              <Label layoutX="80.0" layoutY="297.0" prefHeight="18.0" prefWidth="136.0" />
-                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="136.0" />
-                              <Label layoutX="70.0" layoutY="365.0" prefHeight="18.0" prefWidth="136.0" />
-                              <Label layoutX="70.0" layoutY="400.0" prefHeight="18.0" prefWidth="136.0" />
-                              <Label layoutX="80.0" layoutY="435.0" prefHeight="18.0" prefWidth="136.0" />
-                              <FontAwesomeIconView glyphName="BOOK" layoutX="27.0" layoutY="53.0" size="40" />
-                           </children>
-                        </AnchorPane>
-                        <AnchorPane layoutX="573.0" layoutY="14.0" prefHeight="546.0" prefWidth="239.0" styleClass="issuebookbar" visible="false">
-                           <children>
-                              <Label layoutX="20.0" layoutY="295.0" text="ID:" />
-                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
-                              <Label layoutX="20.0" layoutY="400.0" text="Returned Book:" />
-                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
-                              <Label layoutX="20.0" layoutY="365.0" text="Borrowing:" />
-                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="138.0" text="Student Detail">
-                                 <font>
-                                    <Font size="20.0" />
-                                 </font>
-                              </Label>
-                              <FontAwesomeIconView glyphName="USER" layoutX="25.0" layoutY="51.0" size="30" />
-                              <Label layoutX="44.0" layoutY="295.0" prefHeight="18.0" prefWidth="170.0" />
-                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="152.0" />
-                              <Label layoutX="94.0" layoutY="365.0" prefHeight="18.0" prefWidth="130.0" />
-                              <Label layoutX="80.0" layoutY="435.0" prefHeight="18.0" prefWidth="146.0" />
-                              <Label layoutX="120.0" layoutY="400.0" prefHeight="18.0" prefWidth="98.0" />
-                              <ImageView fitHeight="197.0" fitWidth="207.0" layoutX="22.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../‌image/ValidUser.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                     </children>
-                  </AnchorPane>
+
                   <AnchorPane fx:id="view_return_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView layoutX="20.0" layoutY="156.0" prefHeight="422.0" prefWidth="798.0" stylesheets="@dashbordDesign.css">
@@ -719,7 +598,7 @@
                            </font></Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
                            <children>
@@ -809,6 +688,7 @@
                         <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.66668701171875" startY="-188.74403381347656" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
                      </children>
                   </AnchorPane>
+
                   <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0" styleClass="issuebookbar">
@@ -850,6 +730,139 @@
                         </Button>
                      </children>
                   </AnchorPane>
+                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0" visible="false">
+                     <children>
+                        <AnchorPane layoutX="35.0" layoutY="90.0" prefHeight="310.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <Label layoutX="25.0" layoutY="30.0" text="Issue ID">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="68.0" text="Member ID">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="108.0" text="Book ID/Title">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="151.0" text="Issue Date">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="191.0" text="Due Date">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="156.0" layoutY="30.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue ID" />
+                              <TextField layoutX="156.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" promptText="Member ID" />
+                              <TextField layoutX="156.0" layoutY="108.0" prefHeight="26.0" prefWidth="290.0" promptText="Book ID/Name" />
+                              <TextField layoutX="156.0" layoutY="151.0" prefHeight="26.0" prefWidth="223.0" promptText="DD/MM/YY" />
+                              <TextField layoutX="156.0" layoutY="191.0" prefHeight="26.0" prefWidth="224.0" promptText="DD/MM/YY" />
+                              <Button defaultButton="true" layoutX="392.0" layoutY="148.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
+                                 </graphic>
+                              </Button>
+                              <Button defaultButton="true" layoutX="392.0" layoutY="189.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="138.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" />
+                              <Button layoutX="211.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Update" />
+                              <Button layoutX="284.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Delete" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="573.0" layoutY="90.0" prefHeight="487.0" prefWidth="239.0" styleClass="issuebookbar">
+                           <children>
+                              <Pane layoutX="53.0" layoutY="76.0" prefHeight="165.0" prefWidth="133.0" styleClass="issuebookbar">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="118.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="86.0" layoutY="254.0" text="Book name" />
+                              <Label layoutX="20.0" layoutY="295.0" text="Book ID:" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
+                              <Label layoutX="20.0" layoutY="400.0" text="Genre:" />
+                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
+                              <Label layoutX="20.0" layoutY="365.0" text="Author:" />
+                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="121.0" text="Book Detail">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="86.0" layoutY="296.0" />
+                              <Label layoutX="80.0" layoutY="297.0" prefHeight="18.0" prefWidth="136.0" />
+                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="136.0" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="27.0" layoutY="53.0" size="40" />
+                              <TextField layoutX="79.0" layoutY="290.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="325.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="360.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="395.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="430.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="573.0" layoutY="14.0" prefHeight="546.0" prefWidth="239.0" styleClass="issuebookbar" visible="false">
+                           <children>
+                              <Label layoutX="20.0" layoutY="295.0" text="ID:" />
+                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
+                              <Label layoutX="20.0" layoutY="400.0" text="Returned Book:" />
+                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
+                              <Label layoutX="20.0" layoutY="365.0" text="Borrowing:" />
+                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="138.0" text="Student Detail">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIconView glyphName="USER" layoutX="25.0" layoutY="51.0" size="30" />
+                              <Label layoutX="44.0" layoutY="295.0" prefHeight="18.0" prefWidth="170.0" />
+                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="152.0" />
+                              <Label layoutX="94.0" layoutY="365.0" prefHeight="18.0" prefWidth="130.0" />
+                              <Label layoutX="80.0" layoutY="435.0" prefHeight="18.0" prefWidth="146.0" />
+                              <Label layoutX="120.0" layoutY="400.0" prefHeight="18.0" prefWidth="98.0" />
+                              <ImageView fitHeight="197.0" fitWidth="207.0" layoutX="22.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../‌image/ValidUser.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="35.0" layoutY="32.0" text="Record Issue Book" textFill="#ff0101">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="758.0" layoutY="37.0" mnemonicParsing="false" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" />
+                           </graphic>
+                        </Button>
+                        <ImageView fitHeight="150.0" fitWidth="330.0" layoutX="35.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/Issue Book.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="330.0" layoutX="298.0" layoutY="410.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/Issue Book.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+
+
 
                </children>
             </AnchorPane>
