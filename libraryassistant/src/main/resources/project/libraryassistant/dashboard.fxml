@@ -1,0 +1,877 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="650.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/23" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.libraryassistant.DashboardController">
+   <children>
+      <BorderPane prefHeight="650.0" prefWidth="1024.0" styleClass="semi-form" stylesheets="@dashbordDesign.css">
+         <top>
+            <AnchorPane prefHeight="46.0" prefWidth="1024.0" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane prefHeight="66.66666666666667" prefWidth="1024.0" styleClass="top-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Button fx:id="close" layoutX="974.0" mnemonicParsing="false" onAction="#exit" prefHeight="25.0" prefWidth="50.0" stylesheets="@dashbordDesign.css" AnchorPane.rightAnchor="0.0">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="CLOSE" />
+                           </graphic>
+                           <styleClass>
+                              <String fx:value="close" />
+                              <String fx:value="close" />
+                           </styleClass>
+                        </Button>
+                        <Button fx:id="minimize" layoutX="925.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimize" prefHeight="25.0" prefWidth="50.0" styleClass="minimize" stylesheets="@dashbordDesign.css" AnchorPane.rightAnchor="50.0">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="MINUS" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="343.0" layoutY="13.0" prefHeight="17.0" prefWidth="337.0" text="Library Management System" textFill="WHITE">
+                           <font>
+                              <Font name="Franklin Gothic Heavy Italic" size="25.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="bars_btn" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" onAction="#sliderBars" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css" visible="false">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BARS" size="20" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="chevron_btn" layoutX="1.0" layoutY="30.0" mnemonicParsing="false" onAction="#sliderArrow" prefHeight="25.0" prefWidth="50.0" styleClass="bars" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="CHEVRON_LEFT" size="20" textAlignment="CENTER" />
+                           </graphic>
+                        </Button>
+                        <Line endX="-32.5000114440918" endY="3.333332061767578" layoutX="85.0" layoutY="30.0" startX="-32.5000114440918" startY="26.666667938232422" strokeWidth="2.0" />
+                        <Label layoutX="57.0" layoutY="35.0" text="Home page" visible="false">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="current_form_label" layoutX="57.0" layoutY="35.0" text="Home Page">
+                           <font>
+                              <Font name="Berlin Sans FB Demi Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </top>
+         <left>
+            <AnchorPane prefHeight="591.0" prefWidth="189.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="half_left" layoutY="4.0" prefHeight="591.0" prefWidth="101.0" styleClass="left-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="81.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Circle fx:id="circle_hl" fill="DODGERBLUE" layoutX="50.0" layoutY="42.0" radius="30.0" stroke="BLACK" strokeType="INSIDE" />
+                        <Line endX="50.99998474121094" endY="7.62939453125E-6" layoutX="34.0" layoutY="83.0" startX="-13.83334732055664" startY="7.62939453125E-6" />
+                        <Button fx:id="home_page_hl" layoutX="23.0" layoutY="96.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="HOME" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="manage_book_hl" layoutX="23.0" layoutY="153.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BOOK" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="manage_student_hl" layoutX="23.0" layoutY="210.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="USER" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="issue_book_hl" layoutX="24.0" layoutY="267.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="BOOKMARK" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="return_book_hl" layoutX="24.0" layoutY="324.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="ROTATE_LEFT" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="view_issued_book_hl" layoutX="25.0" layoutY="381.0" mnemonicParsing="false" onAction="#sideNavButtonDesign" prefHeight="50.0" prefWidth="50.0" styleClass="bt_half_left" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="EYE" size="30" />
+                           </graphic>
+                        </Button>
+                        <Button layoutX="11.0" layoutY="552.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="39.0" styleClass="logout-button" stylesheets="@dashbordDesign.css" />
+                        <Button fx:id="logout_btn_hl" layoutX="2.0" layoutY="540.0" mnemonicParsing="false" onAction="#logout_hl" prefHeight="50.0" prefWidth="50.0" styleClass="logout-button" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SIGN_OUT" size="30" />
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="left_form" prefHeight="591.0" prefWidth="189.0" styleClass="left-form" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <Circle fx:id="circle_image" fill="#f8f0f0" layoutX="56.0" layoutY="61.0" radius="42.0" stroke="#a19898" strokeType="INSIDE" />
+                        <Label layoutX="109.0" layoutY="44.0" text="Welcome" />
+                        <Label fx:id="user_name" layoutX="108.0" layoutY="61.0" text="username" />
+                        <Line endX="50.33332824707031" endY="7.62939453125E-6" layoutX="113.0" layoutY="118.0" startX="-100.0" />
+                        <Button fx:id="home_page" layoutX="35.0" layoutY="154.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Home page" textAlignment="RIGHT">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="manage_book" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage book" textAlignment="JUSTIFY">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="manage_student" layoutX="35.0" layoutY="236.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage Student">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="issue_book" layoutX="35.0" layoutY="277.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Issue Book">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="return_book" layoutX="35.0" layoutY="317.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Return Book">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button fx:id="view_issued_book" layoutX="35.0" layoutY="357.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="View Issued Book">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="15.0" layoutY="20.0" mnemonicParsing="false" prefHeight="83.0" prefWidth="83.0" styleClass="edit-button" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="EDIT" size="16" />
+                           </graphic></Button>
+                        <Button fx:id="logout_btn" layoutX="25.0" layoutY="548.0" mnemonicParsing="false" onAction="#logout" prefHeight="35.0" prefWidth="39.0" styleClass="logout-button" stylesheets="@dashbordDesign.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SIGN_OUT" size="25" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="64.0" layoutY="556.0" text="Sign out">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="100.0" fitWidth="120.0" layoutX="28.0" layoutY="405.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/download__1_-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                     </children></AnchorPane>
+               </children>
+            </AnchorPane>
+         </left>
+         <center>
+            <AnchorPane fx:id="center_form" prefHeight="200.0" prefWidth="200.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" BorderPane.alignment="CENTER">
+               <children>
+                  <AnchorPane fx:id="home_page_form" prefHeight="592.0" prefWidth="838.0" styleClass="semi-form" stylesheets="@dashbordDesign.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="298.0" layoutY="141.0" prefHeight="220.0" prefWidth="503.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <Label layoutX="170.0" layoutY="14.0" text="Recently borrowed book">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutX="42.0" layoutY="61.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="15.0">
+                                 <children>
+                                    <ImageView fx:id="borrowedBook1_image" fitHeight="140.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="201.0" layoutY="62.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item" AnchorPane.bottomAnchor="15.0">
+                                 <children>
+                                    <ImageView fx:id="borrowedBook2_image" fitHeight="140.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="356.0" layoutY="63.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item">
+                                 <children>
+                                    <ImageView fx:id="borrowedBook3_image" fitHeight="140.0" fitWidth="116.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="299.0" layoutY="370.0" prefHeight="220.0" prefWidth="503.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <Label layoutX="193.0" layoutY="17.0" text="Available book">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutX="50.0" layoutY="67.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="15.0">
+                                 <children>
+                                    <ImageView fx:id="availableBook1_image" fitHeight="140.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="209.0" layoutY="67.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item" AnchorPane.bottomAnchor="15.0">
+                                 <children>
+                                    <ImageView fx:id="availableBook2_image" fitHeight="140.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="1.0" />
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane layoutX="364.0" layoutY="69.0" prefHeight="140.0" prefWidth="116.0" styleClass="card-item" AnchorPane.bottomAnchor="15.0">
+                                 <children>
+                                    <ImageView fx:id="availableBook3_image" fitHeight="140.0" fitWidth="116.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" />
+                                 </children>
+                              </AnchorPane>
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="40.0" layoutY="10.0" prefHeight="121.0" prefWidth="229.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <FontAwesomeIconView glyphName="USERS" layoutX="14.0" layoutY="63.0" size="50" />
+                              <Label fx:id="no_member" layoutX="115.0" layoutY="47.0" text="0">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="52.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="79.0" layoutY="32.0" text="No. Members">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="572.0" layoutY="9.0" prefHeight="121.0" prefWidth="229.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <FontAwesomeIconView glyphName="BOOKMARK" layoutX="14.0" layoutY="63.0" size="50" />
+                              <Label fx:id="no_issuedBook" layoutX="114.0" layoutY="46.0" text="0">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="52.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="57.0" layoutY="30.0" text="No. issued book">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <ImageView fitHeight="494.0" fitWidth="341.0" layoutX="8.0" layoutY="98.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/1.png" />
+                           </image>
+                        </ImageView>
+                        <AnchorPane layoutX="304.0" layoutY="10.0" prefHeight="121.0" prefWidth="229.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="14.0" layoutY="63.0" size="50" />
+                              <Label fx:id="no_book" layoutX="102.0" layoutY="51.0" text="0">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="52.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="67.0" layoutY="31.0" text="Book quantity">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="add_book_form" layoutX="237.0" layoutY="168.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <TableView fx:id="book_table" layoutX="1.6666666666666665" layoutY="56.0" prefHeight="515.0" prefWidth="512.0" styleClass="board_manage" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                                 <columns>
+                                    <TableColumn fx:id="col_book_id" prefWidth="44.22223150730133" text="ID" />
+                                    <TableColumn fx:id="col_book_title" minWidth="0.0" prefWidth="147.33338165283203" text="Title" />
+                                    <TableColumn fx:id="col_book_author" minWidth="3.3333740234375" prefWidth="133.111083984375" text="Author" />
+                                    <TableColumn fx:id="col_book_genre" prefWidth="114.888916015625" text="Genre" />
+                                    <TableColumn fx:id="col_book_quantity" prefWidth="72.2222900390625" text="Quantity" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="search_book" layoutX="48.0" layoutY="16.0" promptText="Search Book" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.leftAnchor="0.0" />
+                              <Button fx:id="search_book_btn" layoutX="202.0" layoutY="16.0" mnemonicParsing="false" onAction="#searchBook" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.leftAnchor="155.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="back_btn_book" layoutX="460.33333333333337" layoutY="14.0" mnemonicParsing="false" onAction="#return_manage_book" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.rightAnchor="12.333333333333314">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="BACKWARD" size="25" text="" />
+                                 </graphic>
+                              </Button>
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="14.333333333333334" layoutY="10.0" prefHeight="571.0" prefWidth="259.0" styleClass="board_detail" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <Pane layoutX="56.0" layoutY="32.0" prefHeight="201.0" prefWidth="161.0" styleClass="book_image" stylesheets="@manageBook.css" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="56.0">
+                                 <children>
+                                    <ImageView fx:id="bookCoverImageView" fitHeight="201.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="add_book_btn" layoutX="92.0" layoutY="448.0" mnemonicParsing="false" onAction="#addBook" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@manageBook.css" text="ADD" AnchorPane.leftAnchor="92.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="id_book" layoutX="37.0" layoutY="249.0" prefHeight="32.0" prefWidth="200.0" promptText="ID" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="genre_book" layoutX="48.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" promptText="Genre" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="title_book" layoutX="37.0" layoutY="287.0" prefHeight="32.0" prefWidth="200.0" promptText="Title" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="author_book" layoutX="37.0" layoutY="324.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="quantity_book" layoutX="48.0" layoutY="398.0" prefHeight="32.0" prefWidth="200.0" promptText="Quantity" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="HASHTAG" layoutX="15.666666666666668" layoutY="272.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="16.0" layoutY="310.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="USER" layoutX="14.333333333333334" layoutY="348.0" size="21" AnchorPane.leftAnchor="14.333333333333334" />
+                              <FontAwesomeIconView glyphName="TAG" layoutX="16.0" layoutY="385.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="CALCULATOR" layoutX="16.0" layoutY="423.0" size="21" AnchorPane.leftAnchor="12.0" />
+                           </children></AnchorPane>
+                        <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.66668701171875" startY="-188.74403381347656" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="manage_student_form" layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
+                           <children>
+                              <Label layoutX="58.0" layoutY="90.0" text="Enter Student ID" AnchorPane.leftAnchor="61.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="id_student" layoutX="56.0" layoutY="110.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="ADDRESS_CARD_ALT" layoutX="18.0" layoutY="143.0" size="30" />
+                              <Label layoutX="87.0" layoutY="31.0" text="INFORMATION" textFill="#d42323">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="23.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="60.0" layoutY="170.0" text="Enter Name" AnchorPane.leftAnchor="61.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="name_student" layoutX="58.0" layoutY="190.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="USER" layoutX="31.0" layoutY="223.0" size="30" />
+                              <Label layoutX="61.0" layoutY="250.0" text="Enter university" AnchorPane.leftAnchor="61.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIconView glyphName="BUILDING" layoutX="29.0" layoutY="303.0" size="30" />
+                              <Label layoutX="58.0" layoutY="330.0" text="Enter faculty" AnchorPane.leftAnchor="61.0">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="faculty_student" layoutX="55.0" layoutY="350.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="BOOKMARK" layoutX="31.0" layoutY="383.0" size="30" />
+                              <Button fx:id="add_student_btn" layoutX="60.0" layoutY="409.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="ADD">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="delete_student_btn" layoutX="169.0" layoutY="409.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="DELETE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <ComboBox fx:id="university_student" layoutX="58.0" layoutY="272.0" prefHeight="37.0" prefWidth="239.0" promptText="University " />
+                           </children></AnchorPane>
+                        <AnchorPane layoutX="405.0" layoutY="77.0" prefHeight="286.0" prefWidth="461.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0">
+                           <children>
+                              <TableView fx:id="student_table" layoutX="85.0" layoutY="47.0" prefHeight="310.0" prefWidth="461.3333333333333" styleClass="member_board" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="col_student_id" prefWidth="95.33331036567688" text="Student ID" />
+                                    <TableColumn fx:id="col_student_name" prefWidth="135.3333511352539" text="Name" />
+                                    <TableColumn fx:id="col_student_university" prefWidth="90.66667175292969" text="University" />
+                                    <TableColumn fx:id="col_student_faculty" prefWidth="146.6666259765625" text="Faculty" />
+                                 </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <TextField fx:id="search_student" layoutX="354.0" layoutY="20.0" promptText="Student ID" styleClass="search_field" stylesheets="@manageMember.css" />
+                        <Button fx:id="search_student_btn" layoutX="509.0" layoutY="21.0" mnemonicParsing="false" styleClass="search_btn" stylesheets="@manageMember.css">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
+                           </graphic>
+                        </Button>
+                        <AnchorPane layoutX="406.0" layoutY="363.0" prefHeight="200.0" prefWidth="177.0">
+                           <children>
+                              <ImageView fitHeight="200.0" fitWidth="201.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="@../../‌image/chill_girl_1.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="71.0" layoutY="135.0" text="L">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="8.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="584.0" layoutY="370.0" prefHeight="186.0" prefWidth="178.0">
+                           <children>
+                              <ImageView fitHeight="186.0" fitWidth="201.0" layoutX="3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <image>
+                                    <Image url="@../../‌image/template-chill-guy-meme.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="118.0" layoutY="121.0" text="Y">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="8.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="view_return_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView layoutX="20.0" layoutY="156.0" prefHeight="422.0" prefWidth="798.0" stylesheets="@dashbordDesign.css">
+                           <columns>
+                              <TableColumn prefWidth="87.99999237060547" text="Issue ID" />
+                              <TableColumn prefWidth="107.1999740600586" text="Book Name" />
+                              <TableColumn prefWidth="138.39999389648438" text="Student Name" />
+                              <TableColumn prefWidth="125.0" text="Issue Date" />
+                              <TableColumn prefWidth="125.0" text="Due Date" />
+                              <TableColumn prefWidth="108.79998779296875" text="Book Condition" />
+                              <TableColumn prefWidth="102.39999999999998" text="Pelnaty" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="20.0" layoutY="90.0" prefHeight="46.0" prefWidth="430.0" styleClass="searchbox">
+                           <children>
+                              <MenuButton layoutX="14.0" layoutY="8.0" mnemonicParsing="false" styleClass="issuebookbar" text="Search by" AnchorPane.leftAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                 <items>
+                                    <MenuItem mnemonicParsing="false" text="Issue ID" />
+                                    <MenuItem mnemonicParsing="false" text="Issue Date" />
+                                    <MenuItem mnemonicParsing="false" text="Book Name" />
+                                    <MenuItem mnemonicParsing="false" text="Due Date" />
+                                 </items>
+                              </MenuButton>
+                              <Button defaultButton="true" layoutX="367.0" layoutY="8.0" minWidth="43.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css" AnchorPane.rightAnchor="8.0" AnchorPane.topAnchor="8.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SEARCH" size="20" />
+                                 </graphic>
+                              </Button>
+                              <TextField layoutX="119.0" layoutY="10.0" prefHeight="26.0" prefWidth="237.0" />
+                           </children>
+                        </AnchorPane>
+                        <Button layoutX="547.0" layoutY="90.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="258.0" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="25" text="Record Return Book">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                              </FontAwesomeIconView>
+                           </graphic>
+                        </Button>
+                        <Label layoutX="20.0" layoutY="33.0" text="View Return Book" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </AnchorPane>
+                  <AnchorPane fx:id="return_book_form" prefHeight="591.0" prefWidth="838.0" visible="false">
+                     <children>
+                        <AnchorPane layoutX="23.0" layoutY="75.0" prefHeight="500.0" prefWidth="299.0" styleClass="issuebookbar" AnchorPane.leftAnchor="23.0">
+                           <children>
+                              <Pane layoutX="79.0" layoutY="76.0" prefHeight="165.0" prefWidth="133.0" styleClass="issuebookbar">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="118.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="112.0" layoutY="254.0" text="Book name" />
+                              <Label layoutX="20.0" layoutY="330.0" text="Issue ID:" />
+                              <Label layoutX="20.0" layoutY="400.0" text="Issue Date:" />
+                              <Label layoutX="20.0" layoutY="435.0" text="Due Date:" />
+                              <Label layoutX="20.0" layoutY="365.0" text="Student Name:" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="47.0" layoutY="57.0" size="25" text=" " wrappingWidth="35.49732971191406" />
+                              <TextField layoutX="87.0" layoutY="325.0" prefHeight="26.0" prefWidth="159.0" AnchorPane.rightAnchor="22.0" />
+                              <TextField layoutX="112.0" layoutY="360.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="92.0" layoutY="395.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="22.0" />
+                              <TextField layoutX="97.0" layoutY="430.0" prefHeight="26.0" prefWidth="163.0" AnchorPane.rightAnchor="21.0" />
+                              <Label layoutX="69.0" layoutY="34.0" prefHeight="25.0" prefWidth="225.0" text=" Issued Book Detail">
+                                 <font>
+                                    <Font name="Arial Rounded MT Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="350.0" layoutY="75.0" prefHeight="500.0" prefWidth="464.0" styleClass="issuebookbar">
+                           <children>
+                              <FontAwesomeIconView glyphName="ROTATE_LEFT" layoutX="158.0" layoutY="42.0" size="25" text=" Return book" />
+                              <Line endX="32.9000244140625" endY="7.62939453125E-6" layoutX="289.0" layoutY="46.0" startX="-100.0" />
+                              <Label layoutX="53.0" layoutY="96.0" text="Book ID:" />
+                              <Label layoutX="53.0" layoutY="131.0" text="Student ID:" />
+                              <TextField layoutX="186.0" layoutY="91.0" prefHeight="26.0" prefWidth="225.0" AnchorPane.rightAnchor="52.39999999999998" />
+                              <TextField layoutX="186.0" layoutY="126.0" prefHeight="26.0" prefWidth="225.0" AnchorPane.rightAnchor="52.39999999999998" />
+                              <Label layoutX="53.0" layoutY="166.0" text="Book Condition(%):" />
+                              <TextField layoutX="185.0" layoutY="161.0" prefHeight="26.0" prefWidth="225.0" AnchorPane.rightAnchor="53.39999999999998" />
+                              <Label layoutX="53.0" layoutY="221.0" text="Pelnaty Amt:" />
+                              <TextField layoutX="52.0" layoutY="249.0" prefHeight="26.0" prefWidth="97.0" />
+                              <Label layoutX="253.0" layoutY="221.0" text="Note:" />
+                              <Line endX="-13.0999755859375" endY="83.10003662109375" layoutX="179.0" layoutY="268.0" opacity="0.25" startX="-13.100006103515625" startY="-37.29998779296875" />
+                              <TextField layoutX="52.0" layoutY="302.0" prefHeight="26.0" prefWidth="97.0" />
+                              <TextField layoutX="186.0" layoutY="249.0" prefHeight="26.0" prefWidth="225.0" AnchorPane.rightAnchor="52.39999999999998" />
+                              <TextField layoutX="186.0" layoutY="302.0" prefHeight="26.0" prefWidth="225.0" AnchorPane.rightAnchor="52.39999999999998" />
+                              <Button layoutX="165.0" layoutY="374.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="calenderbutton" text="Find Details">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                              <Button layoutX="167.0" layoutY="423.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="150.0" styleClass="calenderbutton" text="Record Return Book">
+                                 <font>
+                                    <Font name="System Bold" size="20.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Line endX="4.699981689453125" endY="387.0999755859375" layoutX="331.0" layoutY="170.0" opacity="0.25" startX="4.699981689453125" startY="-58.50000762939453" />
+                        <Button layoutX="762.0" layoutY="26.0" minWidth="44.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="44.0" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" tabSize="0" />
+                           </graphic>
+                        </Button>
+                        <Label layoutX="23.0" layoutY="32.0" text="Record Return Book" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font></Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <TableView fx:id="book_table_manage" layoutX="1.6666666666666665" layoutY="56.0" prefHeight="515.0" prefWidth="512.0" styleClass="board_manage" stylesheets="@dashbordDesign.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="56.0">
+                                 <columns>
+                                    <TableColumn fx:id="col_book_id_manage" prefWidth="69.33334600925446" text="ID" />
+                                    <TableColumn fx:id="col_book_title_manage" minWidth="0.0" prefWidth="123.33336639404297" text="Title" />
+                                    <TableColumn fx:id="col_book_author_manage" minWidth="3.3333740234375" prefWidth="133.111083984375" text="Author" />
+                                    <TableColumn fx:id="col_book_genre_manage" prefWidth="114.888916015625" text="Genre" />
+                                    <TableColumn fx:id="col_book_quantity_manage" prefWidth="72.2222900390625" text="Quantity" />
+                                 </columns>
+                              </TableView>
+                              <Button fx:id="add_book_btn_manage" alignment="BOTTOM_LEFT" layoutY="7.0" mnemonicParsing="false" onAction="#addBookForm" prefHeight="33.0" prefWidth="112.0" styleClass="search_btn" stylesheets="@manageMember.css" text=" Add Book" textFill="#e00000" AnchorPane.leftAnchor="0.0">
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="PLUS" size="15" />
+                                 </graphic>
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="14.333333333333334" layoutY="10.0" prefHeight="571.0" prefWidth="259.0" styleClass="board_detail" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="10.0">
+                           <children>
+                              <Pane layoutX="56.0" layoutY="32.0" prefHeight="201.0" prefWidth="161.0" styleClass="book_image" stylesheets="@manageBook.css" AnchorPane.leftAnchor="56.0" AnchorPane.rightAnchor="56.0">
+                                 <children>
+                                    <ImageView fx:id="bookCoverImageView_manage" fitHeight="201.0" fitWidth="144.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="update_book_btn_manage" layoutX="61.66666666666667" layoutY="456.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@manageBook.css" text="UPDATE" AnchorPane.leftAnchor="45.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                              <TextField fx:id="id_book_manage" layoutX="37.0" layoutY="249.0" prefHeight="32.0" prefWidth="200.0" promptText="ID" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="genre_book_manage" layoutX="48.0" layoutY="361.0" prefHeight="32.0" prefWidth="200.0" promptText="Genre" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="title_book_manage" layoutX="37.0" layoutY="287.0" prefHeight="32.0" prefWidth="200.0" promptText="Title" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="author_book_manage" layoutX="37.0" layoutY="324.0" prefHeight="32.0" prefWidth="200.0" promptText="Author" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <TextField fx:id="quantity_book_manage" layoutX="48.0" layoutY="398.0" prefHeight="32.0" prefWidth="200.0" promptText="Quantity" AnchorPane.leftAnchor="38.0">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets left="10.0" />
+                                 </padding>
+                              </TextField>
+                              <FontAwesomeIconView glyphName="HASHTAG" layoutX="15.666666666666668" layoutY="272.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="16.0" layoutY="310.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="USER" layoutX="14.333333333333334" layoutY="348.0" size="21" AnchorPane.leftAnchor="14.333333333333334" />
+                              <FontAwesomeIconView glyphName="TAG" layoutX="16.0" layoutY="385.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <FontAwesomeIconView glyphName="CALCULATOR" layoutX="16.0" layoutY="423.0" size="21" AnchorPane.leftAnchor="12.0" />
+                              <Button fx:id="delete_book_btn_manage" layoutX="140.0" layoutY="455.0" mnemonicParsing="false" onAction="#deleteBook" prefHeight="30.0" prefWidth="75.0" styleClass="btn" stylesheets="@manageBook.css" text="DELETE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                        <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.66668701171875" startY="-188.74403381347656" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
+                     </children>
+                  </AnchorPane>
+
+                  <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0" styleClass="issuebookbar">
+                           <columns>
+                              <TableColumn fx:id="col_issued_id" prefWidth="96.0000228881836" text="Issue ID" />
+                              <TableColumn fx:id="col_studentName" prefWidth="136.800048828125" text="Student Name" />
+                              <TableColumn fx:id="col_book" prefWidth="151.19998168945312" text="Book" />
+                              <TableColumn fx:id="col_issue_date" prefWidth="153.60000610351562" text="Issue Date" />
+                              <TableColumn fx:id="col_due_date" prefWidth="109.60003662109375" text="Due Date" />
+                              <TableColumn fx:id="col_status" prefWidth="136.00002034505212" text="Status" />
+                           </columns>
+                        </TableView>
+                        <AnchorPane layoutX="26.0" layoutY="84.0" prefHeight="46.0" prefWidth="381.0" styleClass="searchbox">
+                           <children>
+                              <Button fx:id="search_issue_id_btn" defaultButton="true" layoutX="323.0" layoutY="8.0" minWidth="43.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="54.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="8.0">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView glyphName="SEARCH" size="20" />
+                                 </graphic>
+                              </Button>
+                              <TextField fx:id="issued_id" layoutX="18.0" layoutY="10.0" prefHeight="26.0" prefWidth="278.0" promptText="Issue ID" />
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="33.0" layoutY="22.0" text="View Issue Book" textFill="RED">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="554.0" layoutY="84.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="258.0" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="EDIT" size="25" text="Record Issue Book">
+                                 <font>
+                                    <Font name="System Bold" size="23.0" />
+                                 </font>
+                              </FontAwesomeIconView>
+                           </graphic>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0" visible="false">
+                     <children>
+                        <AnchorPane layoutX="35.0" layoutY="90.0" prefHeight="310.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css">
+                           <children>
+                              <Label layoutX="25.0" layoutY="30.0" text="Issue ID">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="68.0" text="Member ID">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="108.0" text="Book ID/Title">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="151.0" text="Issue Date">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="25.0" layoutY="191.0" text="Due Date">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="156.0" layoutY="30.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue ID" />
+                              <TextField layoutX="156.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" promptText="Member ID" />
+                              <TextField layoutX="156.0" layoutY="108.0" prefHeight="26.0" prefWidth="290.0" promptText="Book ID/Name" />
+                              <TextField layoutX="156.0" layoutY="151.0" prefHeight="26.0" prefWidth="223.0" promptText="DD/MM/YY" />
+                              <TextField layoutX="156.0" layoutY="191.0" prefHeight="26.0" prefWidth="224.0" promptText="DD/MM/YY" />
+                              <Button defaultButton="true" layoutX="392.0" layoutY="148.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
+                                 </graphic>
+                              </Button>
+                              <Button defaultButton="true" layoutX="392.0" layoutY="189.0" minWidth="39.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="50.0" styleClass="calenderbutton" stylesheets="@dashbordDesign.css">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <graphic>
+                                    <FontAwesomeIconView fill="WHITE" glyphName="CALENDAR" mouseTransparent="true" size="18" strokeWidth="5.0" />
+                                 </graphic>
+                              </Button>
+                              <Button layoutX="138.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" />
+                              <Button layoutX="211.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Update" />
+                              <Button layoutX="284.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Delete" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="573.0" layoutY="90.0" prefHeight="487.0" prefWidth="239.0" styleClass="issuebookbar">
+                           <children>
+                              <Pane layoutX="53.0" layoutY="76.0" prefHeight="165.0" prefWidth="133.0" styleClass="issuebookbar">
+                                 <children>
+                                    <ImageView fitHeight="150.0" fitWidth="118.0" layoutX="8.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Label layoutX="86.0" layoutY="254.0" text="Book name" />
+                              <Label layoutX="20.0" layoutY="295.0" text="Book ID:" AnchorPane.leftAnchor="20.0" />
+                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
+                              <Label layoutX="20.0" layoutY="400.0" text="Genre:" />
+                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
+                              <Label layoutX="20.0" layoutY="365.0" text="Author:" />
+                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="121.0" text="Book Detail">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="86.0" layoutY="296.0" />
+                              <Label layoutX="80.0" layoutY="297.0" prefHeight="18.0" prefWidth="136.0" />
+                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="136.0" />
+                              <FontAwesomeIconView glyphName="BOOK" layoutX="27.0" layoutY="53.0" size="40" />
+                              <TextField layoutX="79.0" layoutY="290.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="325.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="360.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="395.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                              <TextField layoutX="79.0" layoutY="430.0" prefHeight="26.0" prefWidth="142.0" AnchorPane.rightAnchor="21.0" />
+                           </children>
+                        </AnchorPane>
+                        <AnchorPane layoutX="573.0" layoutY="14.0" prefHeight="546.0" prefWidth="239.0" styleClass="issuebookbar" visible="false">
+                           <children>
+                              <Label layoutX="20.0" layoutY="295.0" text="ID:" />
+                              <Label layoutX="20.0" layoutY="330.0" text="Name:" />
+                              <Label layoutX="20.0" layoutY="400.0" text="Returned Book:" />
+                              <Label layoutX="20.0" layoutY="435.0" text="Quantity:" />
+                              <Label layoutX="20.0" layoutY="365.0" text="Borrowing:" />
+                              <Label layoutX="70.0" layoutY="22.0" prefHeight="34.0" prefWidth="138.0" text="Student Detail">
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </Label>
+                              <FontAwesomeIconView glyphName="USER" layoutX="25.0" layoutY="51.0" size="30" />
+                              <Label layoutX="44.0" layoutY="295.0" prefHeight="18.0" prefWidth="170.0" />
+                              <Label layoutX="70.0" layoutY="330.0" prefHeight="18.0" prefWidth="152.0" />
+                              <Label layoutX="94.0" layoutY="365.0" prefHeight="18.0" prefWidth="130.0" />
+                              <Label layoutX="80.0" layoutY="435.0" prefHeight="18.0" prefWidth="146.0" />
+                              <Label layoutX="120.0" layoutY="400.0" prefHeight="18.0" prefWidth="98.0" />
+                              <ImageView fitHeight="197.0" fitWidth="207.0" layoutX="22.0" layoutY="76.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../‌image/ValidUser.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="35.0" layoutY="32.0" text="Record Issue Book" textFill="#ff0101">
+                           <font>
+                              <Font name="System Bold" size="30.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="758.0" layoutY="37.0" mnemonicParsing="false" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" />
+                           </graphic>
+                        </Button>
+                        <ImageView fitHeight="150.0" fitWidth="330.0" layoutX="35.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/Issue Book.png" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="150.0" fitWidth="330.0" layoutX="298.0" layoutY="410.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../‌image/Issue Book.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+
+
+
+               </children>
+            </AnchorPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
