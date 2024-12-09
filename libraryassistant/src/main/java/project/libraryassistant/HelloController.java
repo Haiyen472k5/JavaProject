@@ -1,7 +1,5 @@
 package project.libraryassistant;
 
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -47,10 +45,10 @@ public class HelloController {
     private Connection connect;
     private PreparedStatement prepare;
     private ResultSet rs;
-    private Statement statement;
+
     public void login() {
         String sql = "SELECT * FROM admin where username = ? and password = ?";
-        connect = Database.getConnection();
+        connect = DatabaseLogin.getConnection();
         try {
             prepare = connect.prepareStatement(sql);
             prepare.setString(1, username.getText());
@@ -73,7 +71,9 @@ public class HelloController {
                     // to hide login form
                     login_btn.getScene().getWindow().hide();
                     // dashboard
-                    Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+                    Parent root = loader.load();
+                    DashboardController controller = loader.getController();
                     Stage stage = new Stage();
                     Scene scene = new Scene(root);
 
@@ -89,6 +89,9 @@ public class HelloController {
 
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
+                    stage.setOnCloseRequest(event -> {
+                        controller.onCloseRequest(); // Gọi phương thức xử lý đóng ứng dụng
+                    });
                     stage.show();
                 } else {
                     alert = new Alert(Alert.AlertType.ERROR);

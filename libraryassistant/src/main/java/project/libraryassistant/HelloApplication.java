@@ -21,7 +21,9 @@ public class HelloApplication extends Application {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Parent root = fxmlLoader.load();
+
             Scene scene = new Scene(root);
+
             scene.getStylesheets().add(getClass().getResource("designLogin.css").toExternalForm());
             root.setOnMousePressed((MouseEvent event) -> {
                 x = event.getSceneX();

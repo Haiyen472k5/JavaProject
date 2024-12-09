@@ -23,9 +23,15 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.animation.Transition.*;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 
 public class DashboardController {
     /// top
@@ -109,6 +115,19 @@ public class DashboardController {
         slide2.play();
         slide.play();
 
+    }
+
+    private void calculateTotalQuantity() {
+        // Lấy danh sách dữ liệu từ TableView
+        ObservableList<Book> books = book_table_manage.getItems();
+
+        // Tính tổng quantity
+        int totalQuantity = books.stream()
+                .mapToInt(Book::getQuantity) // Lấy quantity từ từng Book
+                .sum();
+
+        // Hiển thị kết quả (nếu có label)
+        no_book.setText(String.valueOf(totalQuantity));
     }
 
     /// left
@@ -511,8 +530,18 @@ public class DashboardController {
     @FXML
     private Button add_book_btn_manage;
 
+    private ObservableList<Book> addedBookList = FXCollections.observableArrayList(); /// book_table_manage
+
     @FXML
-    private Button back_btn_manage;
+    public void addBookForm(ActionEvent event) {
+        if (event.getSource() == add_book_btn_manage) {
+            manage_book_form.setVisible(false);
+            add_book_form.setVisible(true);
+        }
+    }
+
+    private final DatabaseBook db_book = new DatabaseBook();
+
 
     /**
      * manage student.
@@ -565,6 +594,9 @@ public class DashboardController {
     private AnchorPane add_book_form;
 
     @FXML
+    private Button back_btn_book;
+
+    @FXML
     private TableView<Book> book_table;
 
     @FXML
@@ -583,9 +615,6 @@ public class DashboardController {
     private TableColumn<Book, String> col_book_title;
 
     @FXML
-    private Button delete_book_btn;
-
-    @FXML
     private TextField genre_book;
 
     @FXML
@@ -601,7 +630,7 @@ public class DashboardController {
     private TextField quantity_book;
 
     @FXML
-    private ImageView image_book;
+    private ImageView bookCoverImageView;
 
 
     @FXML
@@ -611,6 +640,70 @@ public class DashboardController {
     @FXML
     private TextField title_book;
 
+    @FXML
+    public void return_manage_book(ActionEvent event) {
+        if (event.getSource() == back_btn_book) {
+            add_book_form.setVisible(false);
+            manage_book_form.setVisible(true);
+            book_table_manage.setItems(addedBookList);
+        }
+    }
+
+
+
+    @FXML
+    private void addBook() {
+        // Lấy thông tin từ các trường nhập liệu
+        Book selected = book_table.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a book from the source table.");
+            alert.show();
+            return;
+        }
+        String id = id_book.getText().trim();
+        String title = title_book.getText().trim();
+        String author = author_book.getText().trim();
+        String genre = genre_book.getText().trim();
+        String quantityText = quantity_book.getText().trim();
+        String coverImageUrl = selected.getCoverImageUrl(); // Nếu cần thêm URL ảnh
+
+
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityText);
+            if (quantity <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Quantity must be a positive integer.");
+            alert.show();
+            return;
+        }
+
+        // Kiểm tra trùng ID trong bảng thứ hai (tuỳ chọn)
+        for (Book book : addedBookList) {
+            if (book.getId().equals(id)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "A book with this ID already exists in the added books table.");
+                alert.show();
+                return;
+            }
+        }
+
+        // Thêm sách vào danh sách của bảng thứ hai
+        Book newBook = new Book(id, title, author, genre, quantity, coverImageUrl);
+        addedBookList.add(newBook);
+        db_book.saveBooks(FXCollections.observableArrayList(newBook));
+
+        // Làm sạch các trường nhập liệu
+        clearFields(id_book, title_book, author_book, genre_book, quantity_book, bookCoverImageView);
+
+        // Hiển thị thông báo thành công
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book added to the table successfully!");
+        alert.show();
+
+        book_table_manage.setItems(addedBookList);
+        book_table_manage.refresh();
+        calculateTotalQuantity();
+    }
     /**
      * issue book.
      */
@@ -641,10 +734,40 @@ public class DashboardController {
 
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
 
-    @FXML
-    private ImageView bookCoverImageView;
 
     private String[] uni = {"UET", "ULIS", "UEB", "UEd", "VJU", "UL", "HUS", "UMP", "IS", "SIS"};
+
+    public void connectBook(TableColumn<Book, String> id_col, TableColumn<Book, String> title_col, TableColumn<Book, String> author_col,
+                            TableColumn<Book, String> genre_col, TableColumn<Book, Integer> quantity_col, TableView<Book> bookTable,
+                            TextField id, TextField title, TextField author, TextField genre, TextField quantity, ImageView bookCover, ObservableList<Book> book_list) {
+        id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
+        title_col.setCellValueFactory(new PropertyValueFactory<>("title"));
+        author_col.setCellValueFactory(new PropertyValueFactory<>("author"));
+        genre_col.setCellValueFactory(new PropertyValueFactory<>("genre"));
+        quantity_col.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+
+        // Đổ dữ liệu ban đầu vào TableView
+        bookTable.setItems(book_list);
+
+        bookTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                id.setText(newSelection.getId());
+                title.setText(newSelection.getTitle());
+                author.setText(newSelection.getAuthor());
+                genre.setText(newSelection.getGenre());
+                quantity.setText(String.valueOf(newSelection.getQuantity()));
+
+                // Hiển thị ảnh bìa
+                String coverImageUrl = newSelection.getCoverImageUrl();
+                if (coverImageUrl != null && !coverImageUrl.isEmpty()) {
+                    Image coverImage = new Image(coverImageUrl, true); // true để tải ảnh không đồng bộ
+                   bookCover.setImage(coverImage);
+                } else {
+                    bookCover.setImage(null); // Không có ảnh bìa
+                }
+            }
+        });
+    }
     @FXML
     public void initialize() {
         university_student.getItems().addAll(uni);
@@ -677,56 +800,55 @@ public class DashboardController {
         // Cập nhật nhãn (label) hiển thị
         current_form_label.setText("Home Page");
 
+        //manage book
+        addedBookList = db_book.loadBooks();
+        book_table_manage.setItems(addedBookList);
+        calculateTotalQuantity();
 
-        
 
-        // Kết nối các cột trong bảng với thuộc tính của đối tượng Book
-        col_book_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-        col_book_title.setCellValueFactory(new PropertyValueFactory<>("title"));
-        col_book_author.setCellValueFactory(new PropertyValueFactory<>("author"));
-        col_book_genre.setCellValueFactory(new PropertyValueFactory<>("genre"));
-        col_book_quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+        connectBook(col_book_id, col_book_title, col_book_author, col_book_genre, col_book_quantity, book_table,
+                    id_book, title_book, author_book, genre_book, quantity_book, bookCoverImageView, bookList);
 
-        // Đổ dữ liệu ban đầu vào TableView
-        book_table.setItems(bookList);
-
-        book_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            if (newSelection != null) {
-                id_book.setText(newSelection.getId());
-                title_book.setText(newSelection.getTitle());
-                author_book.setText(newSelection.getAuthor());
-                genre_book.setText(newSelection.getGenre());
-                quantity_book.setText(String.valueOf(newSelection.getQuantity()));
-
-                // Hiển thị ảnh bìa
-                String coverImageUrl = newSelection.getCoverImageUrl();
-                if (coverImageUrl != null && !coverImageUrl.isEmpty()) {
-                    Image coverImage = new Image(coverImageUrl, true); // true để tải ảnh không đồng bộ
-                    bookCoverImageView.setImage(coverImage);
-                } else {
-                    bookCoverImageView.setImage(null); // Không có ảnh bìa
-                }
-            }
-        });
+        connectBook(col_book_id_manage, col_book_title_manage, col_book_author_manage, col_book_genre_manage, col_book_quantity_manage, book_table_manage,
+                    id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage, addedBookList);
 
     }
 
     @FXML
     private void deleteBook() {
-        // Xóa sách đang được chọn trong bảng
-        Book selectedBook = book_table.getSelectionModel().getSelectedItem();
+        // Lấy sách được chọn từ bảng
+        Book selectedBook = book_table_manage.getSelectionModel().getSelectedItem();
+
         if (selectedBook != null) {
-            bookList.remove(selectedBook);
-            clearFields();
+            // Xóa sách khỏi danh sách
+            addedBookList.remove(selectedBook);
+            db_book.deleteBookFromDatabase(selectedBook.getId());
+
+            // Làm mới lại bảng
+            book_table_manage.setItems(FXCollections.observableArrayList(addedBookList));
+            book_table_manage.refresh();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book deleted successfully!");
+            alert.show();
+            calculateTotalQuantity();
+            // Chọn dòng cuối cùng nếu danh sách không trống
+            if (!addedBookList.isEmpty()) {
+                book_table_manage.getSelectionModel().selectLast();
+            } else {
+                clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            }
+        } else {
+            System.out.println("No book selected to delete!");
         }
     }
 
-    private void clearFields() {
-        id_book.clear();
-        title_book.clear();
-        author_book.clear();
-        genre_book.clear();
-        quantity_book.clear();
+    private void clearFields(TextField id, TextField title, TextField author, TextField genre, TextField quantity, ImageView coverImage) {
+        id.clear();
+        title.clear();
+        author.clear();
+        genre.clear();
+        quantity.clear();
+        coverImage.setImage(null);
+
     }
 
     @FXML
@@ -807,5 +929,11 @@ public class DashboardController {
 
             return response.body().string();
         }
+    }
+
+    public void onCloseRequest() {
+        // Lưu danh sách sách khi đóng chương trình
+        db_book.saveBooks(addedBookList);
+        System.out.println("Books saved successfully on close!");
     }
 }
