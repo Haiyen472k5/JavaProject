@@ -131,7 +131,7 @@
                               <Font size="15.0" />
                            </font>
                         </Button>
-                        <Button fx:id="manage_book" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage book" textAlignment="JUSTIFY">
+                        <Button fx:id="manage_book" layoutX="35.0" layoutY="195.0" mnemonicParsing="false" onAction="#navButtonDesign" prefHeight="32.0" prefWidth="153.0" styleClass="bt" stylesheets="@dashbordDesign.css" text="Manage Book" textAlignment="JUSTIFY">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -411,11 +411,6 @@
                                     <Font name="Arial Rounded MT Bold" size="15.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="faculty_student" layoutX="55.0" layoutY="350.0" prefHeight="32.0" prefWidth="237.0" styleClass="text_info" stylesheets="@manageMember.css" AnchorPane.rightAnchor="16.0">
-                                 <font>
-                                    <Font size="15.0" />
-                                 </font>
-                              </TextField>
                               <FontAwesomeIconView glyphName="BOOKMARK" layoutX="31.0" layoutY="383.0" size="30" />
                               <Button fx:id="add_student_btn" layoutX="60.0" layoutY="409.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="ADD">
                                  <font>
@@ -428,6 +423,7 @@
                                  </font>
                               </Button>
                               <ComboBox fx:id="university_student" layoutX="58.0" layoutY="272.0" prefHeight="37.0" prefWidth="239.0" promptText="University " />
+                              <ComboBox fx:id="university_faculty" layoutX="58.0" layoutY="353.0" prefHeight="37.0" prefWidth="239.0" promptText="Faculty" />
                            </children></AnchorPane>
                         <AnchorPane layoutX="405.0" layoutY="77.0" prefHeight="286.0" prefWidth="461.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0">
                            <children>
@@ -697,13 +693,13 @@
 
                   <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <TableView layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0" styleClass="issuebookbar">
+                        <TableView fx:id="issued_book_table" layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0">
                            <columns>
-                              <TableColumn fx:id="col_issued_id" prefWidth="96.0000228881836" text="Issue ID" />
-                              <TableColumn fx:id="col_studentName" prefWidth="136.800048828125" text="Student Name" />
-                              <TableColumn fx:id="col_book" prefWidth="151.19998168945312" text="Book" />
-                              <TableColumn fx:id="col_issue_date" prefWidth="153.60000610351562" text="Issue Date" />
-                              <TableColumn fx:id="col_due_date" prefWidth="109.60003662109375" text="Due Date" />
+                              <TableColumn fx:id="col_issuedID" prefWidth="96.0000228881836" text="Issue ID" />
+                              <TableColumn fx:id="col_studentID" prefWidth="136.800048828125" text="Student ID" />
+                              <TableColumn fx:id="col_bookID" prefWidth="151.19998168945312" text="Book" />
+                              <TableColumn fx:id="col_issuedDate" prefWidth="153.60000610351562" text="Issue Date" />
+                              <TableColumn fx:id="col_dueDate" prefWidth="109.60003662109375" text="Due Date" />
                               <TableColumn fx:id="col_status" prefWidth="136.00002034505212" text="Status" />
                            </columns>
                         </TableView>
@@ -720,7 +716,7 @@
                               <TextField fx:id="issued_id" layoutX="18.0" layoutY="10.0" prefHeight="26.0" prefWidth="278.0" promptText="Issue ID" />
                            </children>
                         </AnchorPane>
-                        <Label layoutX="33.0" layoutY="22.0" text="View Issue Book" textFill="RED">
+                        <Label layoutX="33.0" layoutY="22.0" text="View Issued Book" textFill="RED">
                            <font>
                               <Font name="System Bold" size="30.0" />
                            </font>
@@ -736,9 +732,9 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0" visible="false">
+                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0">
                      <children>
-                        <AnchorPane layoutX="35.0" layoutY="90.0" prefHeight="310.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css">
+                        <AnchorPane layoutX="65.0" layoutY="90.0" prefHeight="310.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css" AnchorPane.leftAnchor="35.0">
                            <children>
                               <Label layoutX="25.0" layoutY="30.0" text="Issue ID">
                                  <font>
@@ -768,14 +764,24 @@
                               <TextField fx:id="id_issue" layoutX="156.0" layoutY="30.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue ID" />
                               <TextField fx:id="id_student_issue" layoutX="156.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" promptText="Student ID" />
                               <TextField fx:id="id_book_issue" layoutX="156.0" layoutY="108.0" prefHeight="26.0" prefWidth="290.0" promptText="Book ID/Name" />
-                              <Button layoutX="138.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" />
-                              <Button layoutX="211.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Update" />
-                              <Button layoutX="284.0" layoutY="239.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Delete" />
+                              <Button fx:id="record_issue" layoutX="123.0" layoutY="240.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                                 </font></Button>
+                              <Button fx:id="check_available_issue" layoutX="200.0" layoutY="239.0" mnemonicParsing="false" onAction="#check_available_issue" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Check Available" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                                 </font></Button>
                               <DatePicker fx:id="issue_date" layoutX="156.0" layoutY="151.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue Date" />
                               <DatePicker fx:id="due_date" layoutX="156.0" layoutY="191.0" prefHeight="26.0" prefWidth="290.0" promptText="Due Date" />
+                              <Button fx:id="delete_issue" layoutX="342.0" layoutY="240.0" mnemonicParsing="false" onAction="#delete_issue" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Delete" textFill="WHITE">
+                                 <font>
+                                    <Font name="Berlin Sans FB Demi Bold" size="15.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
-                        <AnchorPane layoutX="573.0" layoutY="90.0" prefHeight="487.0" prefWidth="239.0" styleClass="issuebookbar">
+                        <AnchorPane layoutX="595.0" layoutY="90.0" prefHeight="487.0" prefWidth="239.0" styleClass="issuebookbar" AnchorPane.leftAnchor="570.0" AnchorPane.topAnchor="50.0">
                            <children>
                               <Pane layoutX="53.0" layoutY="76.0" prefHeight="165.0" prefWidth="133.0" styleClass="issuebookbar">
                                  <children>
@@ -833,11 +839,6 @@
                               <Font name="System Bold" size="30.0" />
                            </font>
                         </Label>
-                        <Button layoutX="758.0" layoutY="37.0" mnemonicParsing="false" styleClass="calenderbutton">
-                           <graphic>
-                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" />
-                           </graphic>
-                        </Button>
                         <ImageView fitHeight="150.0" fitWidth="330.0" layoutX="35.0" layoutY="410.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../../‌image/Issue Book.png" />

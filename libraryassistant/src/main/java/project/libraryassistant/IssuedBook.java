@@ -1,30 +1,43 @@
 package project.libraryassistant;
 
 public class IssuedBook {
-    private String issued_id;
-    private String student_name;
+    private String issueID;
+    private String studentID;
     private String book_name;
-    private String issue_date;
-    private String due_date;
+    private String issueDate;
+    private String dueDate;
     private String status;
 
-    public String getIssued_id() {
-        return issued_id;
+    IssuedBook(String issueID, String studentID, String book_name, String issueDate, String dueDate, String status) {
+        this.issueID = issueID;
+        this.studentID = studentID;
+        this.book_name = book_name;
+        this.issueDate = issueDate;
+        this.dueDate = dueDate;
+        this.status = status;
     }
 
-    public String getStudent_name() {
-        return student_name;
+    public String getIssuedID() {
+        return issueID;
     }
 
-    public String getBook_name() {
+    public String getStudentID() {
+        return studentID;
+    }
+
+    public String getBookName() {
         return book_name;
     }
 
-    public String getIssue_date() {
-        return issue_date;
+    public String getIssueDate() {
+        return issueDate;
     }
 
-    public String getDue_date() {
-        return due_date;
+    public String getDueDate() {
+        return dueDate;
+    }
+
+    public String getStatus() {
+        return status;
     }
 }

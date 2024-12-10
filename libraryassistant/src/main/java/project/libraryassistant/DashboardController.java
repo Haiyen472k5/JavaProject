@@ -27,11 +27,14 @@ import javafx.animation.Transition.*;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.w3c.dom.Text;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalDate;
+import java.util.List;
 
 public class DashboardController {
     /// top
@@ -267,7 +270,7 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
+            
 
 
             home_page.getStyleClass().add("bt_active");
@@ -282,7 +285,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             manage_book.getStyleClass().add("bt_active");
             manage_book_hl.getStyleClass().add("bt_half_left_active");
@@ -296,7 +298,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             manage_student.getStyleClass().add("bt_active");
             manage_student_hl.getStyleClass().add("bt_half_left_active");
@@ -310,7 +311,6 @@ public class DashboardController {
             issue_book_form.setVisible(true);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             issue_book.getStyleClass().add("bt_active");
             issue_book_hl.getStyleClass().add("bt_half_left_active");
@@ -324,7 +324,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(true);
-            view_return_book_form.setVisible(false);
 
             return_book.getStyleClass().add("bt_active");
             return_book_hl.getStyleClass().add("bt_half_left_active");
@@ -338,7 +337,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(true);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             view_issued_book.getStyleClass().add("bt_active");
             view_issued_book_hl.getStyleClass().add("bt_half_left_active");
@@ -374,7 +372,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
 
             home_page.getStyleClass().add("bt_active");
@@ -389,8 +386,7 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
-
+            
             manage_book.getStyleClass().add("bt_active");
             manage_book_hl.getStyleClass().add("bt_half_left_active");
 
@@ -403,7 +399,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             manage_student.getStyleClass().add("bt_active");
             manage_student_hl.getStyleClass().add("bt_half_left_active");
@@ -417,7 +412,6 @@ public class DashboardController {
             issue_book_form.setVisible(true);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             issue_book.getStyleClass().add("bt_active");
             issue_book_hl.getStyleClass().add("bt_half_left_active");
@@ -431,7 +425,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(true);
-            view_return_book_form.setVisible(false);
 
             return_book.getStyleClass().add("bt_active");
             return_book_hl.getStyleClass().add("bt_half_left_active");
@@ -445,7 +438,6 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(true);
             return_book_form.setVisible(false);
-            view_return_book_form.setVisible(false);
 
             view_issued_book.getStyleClass().add("bt_active");
             view_issued_book_hl.getStyleClass().add("bt_half_left_active");
@@ -593,7 +585,7 @@ public class DashboardController {
     private TextField name_student;
 
     @FXML
-    private TextField faculty_student;
+    private ComboBox<String> university_faculty;
 
     @FXML
     private Button add_student_btn;
@@ -602,14 +594,14 @@ public class DashboardController {
     private Button delete_student_btn;
 
     public void addStudent() {
-        if (id_student.getText().isEmpty() || name_student.getText().isEmpty() || faculty_student.getText().isEmpty() || university_student.getValue() == null) {
+        if (id_student.getText().isEmpty() || name_student.getText().isEmpty() || university_faculty.getValue() == null || university_student.getValue() == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter in full.");
             alert.show();
             return;
         }
         String id = id_student.getText().trim();
         String name = name_student.getText().trim();
-        String faculty = faculty_student.getText().trim();
+        String faculty = university_faculty.getValue().trim();
         String university = university_student.getValue().trim();
 
         for (Student student : studentList) {
@@ -624,7 +616,7 @@ public class DashboardController {
         studentList.add(newStudent);
         db_student.saveStudent(FXCollections.observableArrayList(newStudent));
 
-        clearFieldsStudent(id_student, name_student, faculty_student, university_student);
+        clearFieldsStudent(id_student, name_student, university_faculty, university_student);
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student added to the table successfully!");
         alert.show();
@@ -654,7 +646,7 @@ public class DashboardController {
             if (!studentList.isEmpty()) {
                 student_table.getSelectionModel().selectLast();
             } else {
-                clearFieldsStudent(id_student, name_student, faculty_student, university_student);
+                clearFieldsStudent(id_student, name_student, university_faculty, university_student);
             }
         } else {
             System.out.println("No student selected to delete!");
@@ -665,7 +657,7 @@ public class DashboardController {
     /**
      * add_book.
      */
-
+    private ObservableList<Book> bookList = FXCollections.observableArrayList();
     @FXML
     private AnchorPane add_book_form;
 
@@ -886,11 +878,104 @@ public class DashboardController {
     @FXML
     private TextField quantity_book_detail;
 
+    @FXML
+    private Button delete_issue;
+
+    @FXML
+    private Button check_available_issue;
+
+    @FXML
+    private Button record_issue;
+
+    @FXML
+    void delete_issue() {
+        clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+    }
+
+    @FXML
+    void check_available_issue() {
+        String id_issue = id_book_issue.getText().trim();
+        String id_student = id_student_issue.getText().trim();
+        String id_book = id_book_issue.getText().trim();
+        LocalDate selectedDate = issue_date.getValue();
+        LocalDate dueDate = due_date.getValue();
+        if (id_issue == null || id_student == null || id_book == null || selectedDate == null || dueDate == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields.");
+            alert.show();
+            return;
+        }
+
+        boolean check_student = false;
+        boolean check_book = false;
+        Book detail_book = null;
+        Student detail_student = null;
+        for (Student student : studentList) {
+            if (student.getId().equals(id_student)) {
+                check_student = true;
+                detail_student = student;
+                break;
+            }
+        }
+        if (check_student == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Student does not exist!");
+            alert.show();
+            return;
+        }
+
+        for (Book book : addedBookList) {
+            if (book.getId().equals(id_book)) {
+                check_book = true;
+                detail_book = book;
+                break;
+            }
+        }
+        if (check_book == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Book does not exist!");
+            alert.show();
+            return;
+        }
+
+        id_book_detail.setText(detail_book.getId());
+        name_book_detail.setText(detail_book.getTitle());
+        author_book_detail.setText(detail_book.getAuthor());
+        genre_book_detail.setText(detail_book.getGenre());
+        quantity_book_detail.setText(String.valueOf(detail_book.getQuantity()));
+        Image coverImage = new Image(detail_book.getCoverImageUrl(), true);
+        image_book_detail.setImage(coverImage);
+
+
+    }
+
+
+
     /**
-     * view issue book form.
+     * view issued book form.
      */
+    private ObservableList<IssuedBook> issuedBookList = FXCollections.observableArrayList();
+    private final DatabaseIssuedBook db_issuedBook = new DatabaseIssuedBook();
     @FXML
     private AnchorPane view_issued_book_form;
+
+    @FXML
+    private TableView<IssuedBook> issued_book_table;
+    @FXML
+    private TableColumn<IssuedBook, String> col_issuedID;
+
+    @FXML
+    private TableColumn<IssuedBook, String> col_studentID;
+
+    @FXML
+    private TableColumn<IssuedBook, String> col_bookID;
+
+    @FXML
+    private TableColumn<IssuedBook, String>  col_issuedDate;
+
+    @FXML
+    private TableColumn<IssuedBook, String>  col_dueDate;
+
+    @FXML
+    private TableColumn<IssuedBook, String>  col_status;
 
 
 
@@ -900,21 +985,11 @@ public class DashboardController {
     @FXML
     private AnchorPane return_book_form;
 
-    /**
-     * view return book form.
-     */
-
-    @FXML
-    private AnchorPane view_return_book_form;
+    
 
 
 
 
-    private ObservableList<Book> bookList = FXCollections.observableArrayList();
-
-
-
-    private String[] uni = {"UET", "ULIS", "UEB", "UEd", "VJU", "UL", "HUS", "UMP", "IS", "SIS"};
 
     public void connectBook(TableColumn<Book, String> id_col, TableColumn<Book, String> title_col, TableColumn<Book, String> author_col,
                             TableColumn<Book, String> genre_col, TableColumn<Book, Integer> quantity_col, TableView<Book> bookTable,
@@ -950,7 +1025,7 @@ public class DashboardController {
 
     public void connectStudent(TableColumn<Student, String> id, TableColumn<Student, String> name, TableColumn<Student, String> university,
                                 TableColumn<Student, String> faculty, ObservableList<Student> studentList,
-                               TextField idField, TextField nameField, TextField faculty_field, ComboBox<String> university_field) {
+                               TextField idField, TextField nameField, ComboBox<String> faculty_field, ComboBox<String> university_field) {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         university.setCellValueFactory(new PropertyValueFactory<>("university"));
@@ -961,15 +1036,48 @@ public class DashboardController {
             if (newSelection != null) {
                 idField.setText(newSelection.getId());
                 nameField.setText(newSelection.getName());
-                faculty_field.setText(newSelection.getFaculty());
+                faculty_field.setEditable(true);
+                faculty_field.getEditor().setText(newSelection.getFaculty());
                 university_field.setEditable(true);
                 university_field.getEditor().setText(newSelection.getUniversity());
             }
         });
     }
+
+    public void connectIssuedBook(TableColumn<IssuedBook, String> issuedID, TableColumn<IssuedBook, String> studentID,
+                                  TableColumn<IssuedBook, String> bookName, TableColumn<IssuedBook, String> issueDate,
+                                  TableColumn<IssuedBook, String> dueDate, TableColumn<IssuedBook, String> status,
+                                  ObservableList<IssuedBook> issuedBookList, TableView<IssuedBook> issued_book_table) {
+        issuedID.setCellValueFactory(new PropertyValueFactory<>("issuedID"));
+        studentID.setCellValueFactory(new PropertyValueFactory<>("studentID"));
+        bookName.setCellValueFactory(new PropertyValueFactory<>("bookName"));
+        issueDate.setCellValueFactory(new PropertyValueFactory<>("issueDate"));
+        dueDate.setCellValueFactory(new PropertyValueFactory<>("dueDate"));
+        status.setCellValueFactory(new PropertyValueFactory<>("status"));
+        issued_book_table.setItems(issuedBookList);
+    }
+    List<University> universities = University.getUniversities();
     @FXML
     public void initialize() {
-        university_student.getItems().addAll(uni);
+
+        universities.forEach(u -> university_student.getItems().add(u.getName()));
+        university_student.setOnAction(event -> {
+            String selectedUniversity = university_student.getValue();
+            if (selectedUniversity != null) {
+                // Tìm trường đại học tương ứng từ danh sách
+                University university = universities.stream()
+                        .filter(u -> u.getName().equals(selectedUniversity))
+                        .findFirst()
+                        .orElse(null);
+
+                // Cập nhật danh sách khoa cho trường đại học đã chọn
+                if (university != null) {
+                    university_faculty.getItems().clear();  // Xóa danh sách khoa cũ
+                    university_faculty.getItems().addAll(university.getFaculties());  // Thêm các khoa của trường đại học
+                }
+            }
+        });
+
 
         home_page.getStyleClass().add("bt_active"); // Home Page mặc định là nút "active"
         manage_book.getStyleClass().add("bt");
@@ -1003,7 +1111,7 @@ public class DashboardController {
         studentList = db_student.loadStudents();
         student_table.setItems(studentList);
         connectStudent(col_student_id, col_student_name, col_student_university, col_student_faculty, studentList,
-                id_student, name_student, faculty_student, university_student);
+                id_student, name_student, university_faculty, university_student);
         calculateTotalStudent();
 
 
@@ -1018,6 +1126,13 @@ public class DashboardController {
 
         connectBook(col_book_id_manage, col_book_title_manage, col_book_author_manage, col_book_genre_manage, col_book_quantity_manage, book_table_manage,
                     id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage, addedBookList);
+
+
+        // view issued book
+
+        connectIssuedBook(col_issuedID, col_studentID, col_bookID, col_issuedDate, col_dueDate, col_status, issuedBookList, issued_book_table);
+        issuedBookList = db_issuedBook.loadIssuedBooks();
+        issued_book_table.setItems(issuedBookList);
 
     }
 
@@ -1057,15 +1172,27 @@ public class DashboardController {
         coverImage.setImage(null);
 
     }
-
-    public void clearFieldsStudent(TextField idField, TextField nameField, TextField facultyField, ComboBox<String> universityComboBox) {
+    @FXML
+    public void clearFieldsStudent(TextField idField, TextField nameField, ComboBox<String> facultyField, ComboBox<String> universityComboBox) {
         // Xóa nội dung TextField
         idField.clear();
         nameField.clear();
-        facultyField.clear();
+        universityComboBox.getSelectionModel().clearSelection();
 
         // Đặt ComboBox về giá trị mặc định (hoặc xóa chọn)
         universityComboBox.getSelectionModel().clearSelection();
+    }
+
+    @FXML
+    public void clearFieldsIssueBook(TextField issueID, TextField studentID, TextField bookName, DatePicker issueDate,
+                                     DatePicker dueDate, TextField bookID, TextField book_name, TextField book_author,
+                                     TextField book_genre, TextField book_quantity, ImageView book_image) {
+        issueID.clear();
+        studentID.clear();
+        bookName.clear();
+        issueDate.setValue(null);
+        dueDate.setValue(null);
+        clearFields(bookID, book_name, book_author, book_genre, book_quantity, book_image);
     }
 
     @FXML
@@ -1133,10 +1260,9 @@ public class DashboardController {
     }
 
     private String generateCustomBookID(String title) {
-        String prefix = "BK"; // Tiền tố cho "Book"
-        String suffix = Integer.toHexString(title.hashCode()).toUpperCase(); // Sinh mã băm từ tiêu đề
-        String randomPart = Long.toHexString(System.nanoTime()).substring(0, 4).toUpperCase(); // Phần ngẫu nhiên
-        return prefix + "-" + suffix.substring(0, 4) + randomPart; // Kết hợp các phần
+        String hash = Integer.toHexString(title.hashCode()).toUpperCase(); // Mã băm từ tiêu đề sách
+        String randomPart = Integer.toHexString((int) (Math.random() * 0xFFFF)).toUpperCase(); // Tạo số ngẫu nhiên
+        return (hash + randomPart).substring(0, 6); // Lấy 6 ký tự đầu tiên
     }
 
     private String fetchBooksFromGoogleAPI(String keyword) throws Exception {
