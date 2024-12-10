@@ -248,7 +248,7 @@
                         <AnchorPane layoutX="572.0" layoutY="9.0" prefHeight="121.0" prefWidth="229.0" styleClass="statistic" stylesheets="@dashbordDesign.css">
                            <children>
                               <FontAwesomeIconView glyphName="BOOKMARK" layoutX="14.0" layoutY="63.0" size="50" />
-                              <Label fx:id="no_issuedBook" layoutX="114.0" layoutY="46.0" text="0">
+                              <Label fx:id="no_issued" layoutX="114.0" layoutY="46.0" text="0">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="52.0" />
                                  </font>
@@ -691,13 +691,13 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView fx:id="issued_book_table" layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0">
                            <columns>
                               <TableColumn fx:id="col_issuedID" prefWidth="96.0000228881836" text="Issue ID" />
                               <TableColumn fx:id="col_studentID" prefWidth="136.800048828125" text="Student ID" />
-                              <TableColumn fx:id="col_bookID" prefWidth="151.19998168945312" text="Book" />
+                              <TableColumn fx:id="col_bookName" prefWidth="151.19998168945312" text="Book" />
                               <TableColumn fx:id="col_issuedDate" prefWidth="153.60000610351562" text="Issue Date" />
                               <TableColumn fx:id="col_dueDate" prefWidth="109.60003662109375" text="Due Date" />
                               <TableColumn fx:id="col_status" prefWidth="136.00002034505212" text="Status" />
@@ -732,7 +732,7 @@
                         </Button>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0">
+                  <AnchorPane fx:id="issue_book_form" layoutX="-1.0" prefHeight="592.0" prefWidth="838.0" visible="false">
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="90.0" prefHeight="310.0" prefWidth="520.0" styleClass="issuebookbar" stylesheets="@dashbordDesign.css" AnchorPane.leftAnchor="35.0">
                            <children>
@@ -764,7 +764,7 @@
                               <TextField fx:id="id_issue" layoutX="156.0" layoutY="30.0" prefHeight="26.0" prefWidth="290.0" promptText="Issue ID" />
                               <TextField fx:id="id_student_issue" layoutX="156.0" layoutY="68.0" prefHeight="26.0" prefWidth="290.0" promptText="Student ID" />
                               <TextField fx:id="id_book_issue" layoutX="156.0" layoutY="108.0" prefHeight="26.0" prefWidth="290.0" promptText="Book ID/Name" />
-                              <Button fx:id="record_issue" layoutX="123.0" layoutY="240.0" mnemonicParsing="false" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" textFill="WHITE">
+                              <Button fx:id="record_issue" layoutX="123.0" layoutY="240.0" mnemonicParsing="false" onAction="#record" styleClass="calenderbutton" stylesheets="@dashbordDesign.css" text="Record" textFill="WHITE">
                                  <font>
                                     <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                                  </font></Button>

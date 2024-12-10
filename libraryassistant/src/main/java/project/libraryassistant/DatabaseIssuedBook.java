@@ -21,9 +21,9 @@ public class DatabaseIssuedBook {
     }
 
     public void saveIssuedBooks(ObservableList<IssuedBook> books) {
-        String sql = "INSERT INTO issuedbook (issuedID, studentName, bookName, issueDate, dueDate, status) "
+        String sql = "INSERT INTO issuedbook (issueID, studentID, bookName, issueDate, dueDate, status) "
                 + "VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE "
-                + "issuedID = VALUES(issuedID), studentName = VALUES(studentName), bookName = VALUES(bookName),"
+                + "issueID = VALUES(issueID), studentID = VALUES(studentID), bookName = VALUES(bookName),"
                 + "issueDate = VALUES(issueDate), dueDate = VALUES(dueDate), status = VALUES(status)";
         try (Connection connect = getConnection(); PreparedStatement pstmt = connect.prepareStatement(sql)) {
             for (IssuedBook book : books) {
@@ -49,8 +49,8 @@ public class DatabaseIssuedBook {
         try (Connection connect = getConnection(); Statement stmt = connect.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
                 books.add(new IssuedBook(
-                        rs.getString("issuedID"),
-                        rs.getString("studentName"),
+                        rs.getString("issueID"),
+                        rs.getString("studentID"),
                         rs.getString("bookName"),
                         rs.getString("issueDate"),
                         rs.getString("dueDate"),

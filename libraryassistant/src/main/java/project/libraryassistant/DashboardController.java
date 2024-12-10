@@ -473,6 +473,9 @@ public class DashboardController {
     private Label no_member;
 
     @FXML
+    private Label no_issued;
+
+    @FXML
     private ImageView availableBook1_image;
 
     @FXML
@@ -892,16 +895,22 @@ public class DashboardController {
         clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
                 author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
     }
-
+    private boolean checkSucess = false;
     @FXML
     void check_available_issue() {
         String id_issue = id_book_issue.getText().trim();
         String id_student = id_student_issue.getText().trim();
         String id_book = id_book_issue.getText().trim();
-        LocalDate selectedDate = issue_date.getValue();
+        LocalDate issueDate = issue_date.getValue();
         LocalDate dueDate = due_date.getValue();
-        if (id_issue == null || id_student == null || id_book == null || selectedDate == null || dueDate == null) {
+        if (id_issue == null || id_student == null || id_book == null || issueDate == null || dueDate == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields.");
+            alert.show();
+            return;
+        }
+
+        if (issueDate.compareTo(dueDate) >= 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Date invalid.");
             alert.show();
             return;
         }
@@ -909,11 +918,9 @@ public class DashboardController {
         boolean check_student = false;
         boolean check_book = false;
         Book detail_book = null;
-        Student detail_student = null;
         for (Student student : studentList) {
             if (student.getId().equals(id_student)) {
                 check_student = true;
-                detail_student = student;
                 break;
             }
         }
@@ -943,8 +950,75 @@ public class DashboardController {
         quantity_book_detail.setText(String.valueOf(detail_book.getQuantity()));
         Image coverImage = new Image(detail_book.getCoverImageUrl(), true);
         image_book_detail.setImage(coverImage);
+        checkSucess = true;
 
+    }
 
+    private void calculateTotalIssuedBook() {
+        ObservableList<IssuedBook> issuedBooks = issued_book_table.getItems();
+
+        // Tính tổng quantity
+        int totalStudent = issuedBooks.size();
+
+        // Hiển thị kết quả (nếu có label)
+        no_issued.setText(String.valueOf(totalStudent));
+    }
+    @FXML
+    void record() {
+
+        String student_id_record = id_student_issue.getText().trim();
+        String book_id_record = id_book_issue.getText().trim();
+        String issue_date_record = issue_date.getValue().toString().trim();
+        String due_date_record = due_date.getValue().toString().trim();
+        String status = "Pending";
+
+        if (checkSucess == false) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Toi canh cao elm!");
+            alert.show();
+            return;
+        }
+        id_issue.setText(generateIssuedID());
+        String issue_id_record = id_issue.getText().trim();
+        for (IssuedBook issuedBook : issuedBookList) {
+            if (issuedBook.getIssuedID().equals(issue_id_record)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "This issue id already exists!");
+                alert.show();
+                return;
+            }
+        }
+        String bookName = null;
+        Book issued_book = null;
+        for (int i = 0; i < addedBookList.size(); i++) {
+            if (addedBookList.get(i).getId().equals(book_id_record)) {
+                int quantity = addedBookList.get(i).getQuantity();
+                bookName = addedBookList.get(i).getTitle();
+                System.out.println(quantity);
+                if (quantity == 0) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING, "Het sach roi ban eei!");
+                    alert.show();
+                    return;
+                }
+                issued_book = addedBookList.get(i);
+                issued_book.setQuantity(quantity-1);
+                addedBookList.set(i, issued_book);
+                db_book.updateBookInDatabase(issued_book);
+                book_table_manage.refresh();
+                System.out.println("sucess");
+                break;
+            }
+        }
+
+        IssuedBook newBook = new IssuedBook(issue_id_record, student_id_record, bookName , issue_date_record, due_date_record, status);
+        issuedBookList.add(newBook);
+        db_issuedBook.saveIssuedBooks(FXCollections.observableArrayList(newBook));
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book added to the table successfully!");
+        alert.show();
+
+        issued_book_table.setItems(issuedBookList);
+        issued_book_table.refresh();
+        calculateTotalIssuedBook();
+
+        checkSucess = false;
     }
 
 
@@ -966,7 +1040,7 @@ public class DashboardController {
     private TableColumn<IssuedBook, String> col_studentID;
 
     @FXML
-    private TableColumn<IssuedBook, String> col_bookID;
+    private TableColumn<IssuedBook, String> col_bookName;
 
     @FXML
     private TableColumn<IssuedBook, String>  col_issuedDate;
@@ -1130,10 +1204,10 @@ public class DashboardController {
 
         // view issued book
 
-        connectIssuedBook(col_issuedID, col_studentID, col_bookID, col_issuedDate, col_dueDate, col_status, issuedBookList, issued_book_table);
+        connectIssuedBook(col_issuedID, col_studentID, col_bookName, col_issuedDate, col_dueDate, col_status, issuedBookList, issued_book_table);
         issuedBookList = db_issuedBook.loadIssuedBooks();
         issued_book_table.setItems(issuedBookList);
-
+        calculateTotalIssuedBook();
     }
 
     @FXML
@@ -1263,6 +1337,12 @@ public class DashboardController {
         String hash = Integer.toHexString(title.hashCode()).toUpperCase(); // Mã băm từ tiêu đề sách
         String randomPart = Integer.toHexString((int) (Math.random() * 0xFFFF)).toUpperCase(); // Tạo số ngẫu nhiên
         return (hash + randomPart).substring(0, 6); // Lấy 6 ký tự đầu tiên
+    }
+
+    private String generateIssuedID() {
+        long currentTimeMillis = System.currentTimeMillis();
+        String base36ID = Long.toString(currentTimeMillis, 36).toUpperCase();
+        return base36ID.substring(base36ID.length() - 4); // Lấy 4 ký tự cuối
     }
 
     private String fetchBooksFromGoogleAPI(String keyword) throws Exception {
