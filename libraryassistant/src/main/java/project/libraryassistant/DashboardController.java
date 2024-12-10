@@ -117,17 +117,26 @@ public class DashboardController {
 
     }
 
-    private void calculateTotalQuantity() {
+    private void calculateTotalBook() {
         // Lấy danh sách dữ liệu từ TableView
         ObservableList<Book> books = book_table_manage.getItems();
 
         // Tính tổng quantity
-        int totalQuantity = books.stream()
-                .mapToInt(Book::getQuantity) // Lấy quantity từ từng Book
-                .sum();
+        int totalBook = books.size();
 
         // Hiển thị kết quả (nếu có label)
-        no_book.setText(String.valueOf(totalQuantity));
+        no_book.setText(String.valueOf(totalBook));
+    }
+
+    private void calculateTotalStudent() {
+        // Lấy danh sách dữ liệu từ TableView
+        ObservableList<Student> students = student_table.getItems();
+
+        // Tính tổng quantity
+        int totalStudent = students.size();
+
+        // Hiển thị kết quả (nếu có label)
+        no_member.setText(String.valueOf(totalStudent));
     }
 
     /// left
@@ -547,13 +556,20 @@ public class DashboardController {
      * manage student.
      */
 
+    private final DatabaseStudent db_student = new DatabaseStudent();
+    private ObservableList<Student> studentList = FXCollections.observableArrayList();
+
     @FXML
     private AnchorPane manage_student_form;
 
     @FXML
     private TextField search_student;
 
-    @FXML Button search_student_btn;
+    @FXML
+    private Button search_student_btn;
+
+    @FXML
+    private TableView<Student> student_table;
 
     @FXML
     private TableColumn<Student, String> col_student_faculty;
@@ -584,6 +600,66 @@ public class DashboardController {
 
     @FXML
     private Button delete_student_btn;
+
+    public void addStudent() {
+        if (id_student.getText().isEmpty() || name_student.getText().isEmpty() || faculty_student.getText().isEmpty() || university_student.getValue() == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter in full.");
+            alert.show();
+            return;
+        }
+        String id = id_student.getText().trim();
+        String name = name_student.getText().trim();
+        String faculty = faculty_student.getText().trim();
+        String university = university_student.getValue().trim();
+
+        for (Student student : studentList) {
+            if (id.equals(student.getId())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "A student with this ID already exists in the student table.");
+                alert.show();
+                return;
+            }
+        }
+
+        Student newStudent = new Student(id, name, university, faculty);
+        studentList.add(newStudent);
+        db_student.saveStudent(FXCollections.observableArrayList(newStudent));
+
+        clearFieldsStudent(id_student, name_student, faculty_student, university_student);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student added to the table successfully!");
+        alert.show();
+
+        student_table.setItems(studentList);
+        student_table.refresh();
+        calculateTotalStudent();
+    }
+
+    @FXML
+    private void deleteStudent() {
+        // Lấy sách được chọn từ bảng
+        Student selectedStudent = student_table.getSelectionModel().getSelectedItem();
+
+        if (selectedStudent != null) {
+            // Xóa sách khỏi danh sách
+            studentList.remove(selectedStudent);
+            db_student.deleteStudent(selectedStudent.getId());
+
+            // Làm mới lại bảng
+            student_table.setItems(FXCollections.observableArrayList(studentList));
+            student_table.refresh();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully!");
+            alert.show();
+            calculateTotalStudent();
+            // Chọn dòng cuối cùng nếu danh sách không trống
+            if (!studentList.isEmpty()) {
+                student_table.getSelectionModel().selectLast();
+            } else {
+                clearFieldsStudent(id_student, name_student, faculty_student, university_student);
+            }
+        } else {
+            System.out.println("No student selected to delete!");
+        }
+    }
 
 
     /**
@@ -702,7 +778,7 @@ public class DashboardController {
 
         book_table_manage.setItems(addedBookList);
         book_table_manage.refresh();
-        calculateTotalQuantity();
+        calculateTotalBook();
     }
     /**
      * issue book.
@@ -733,6 +809,7 @@ public class DashboardController {
 
 
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+
 
 
     private String[] uni = {"UET", "ULIS", "UEB", "UEd", "VJU", "UL", "HUS", "UMP", "IS", "SIS"};
@@ -768,6 +845,26 @@ public class DashboardController {
             }
         });
     }
+
+    public void connectStudent(TableColumn<Student, String> id, TableColumn<Student, String> name, TableColumn<Student, String> university,
+                                TableColumn<Student, String> faculty, ObservableList<Student> studentList,
+                               TextField idField, TextField nameField, TextField faculty_field, ComboBox<String> university_field) {
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        university.setCellValueFactory(new PropertyValueFactory<>("university"));
+        faculty.setCellValueFactory(new PropertyValueFactory<>("faculty"));
+        student_table.setItems(studentList);
+
+        student_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                idField.setText(newSelection.getId());
+                nameField.setText(newSelection.getName());
+                faculty_field.setText(newSelection.getFaculty());
+                university_field.setEditable(true);
+                university_field.getEditor().setText(newSelection.getUniversity());
+            }
+        });
+    }
     @FXML
     public void initialize() {
         university_student.getItems().addAll(uni);
@@ -800,10 +897,18 @@ public class DashboardController {
         // Cập nhật nhãn (label) hiển thị
         current_form_label.setText("Home Page");
 
+        //manage student
+        studentList = db_student.loadStudents();
+        student_table.setItems(studentList);
+        connectStudent(col_student_id, col_student_name, col_student_university, col_student_faculty, studentList,
+                id_student, name_student, faculty_student, university_student);
+        calculateTotalStudent();
+
+
         //manage book
         addedBookList = db_book.loadBooks();
         book_table_manage.setItems(addedBookList);
-        calculateTotalQuantity();
+        calculateTotalBook();
 
 
         connectBook(col_book_id, col_book_title, col_book_author, col_book_genre, col_book_quantity, book_table,
@@ -829,7 +934,7 @@ public class DashboardController {
             book_table_manage.refresh();
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book deleted successfully!");
             alert.show();
-            calculateTotalQuantity();
+            calculateTotalBook();
             // Chọn dòng cuối cùng nếu danh sách không trống
             if (!addedBookList.isEmpty()) {
                 book_table_manage.getSelectionModel().selectLast();
@@ -849,6 +954,16 @@ public class DashboardController {
         quantity.clear();
         coverImage.setImage(null);
 
+    }
+
+    public void clearFieldsStudent(TextField idField, TextField nameField, TextField facultyField, ComboBox<String> universityComboBox) {
+        // Xóa nội dung TextField
+        idField.clear();
+        nameField.clear();
+        facultyField.clear();
+
+        // Đặt ComboBox về giá trị mặc định (hoặc xóa chọn)
+        universityComboBox.getSelectionModel().clearSelection();
     }
 
     @FXML

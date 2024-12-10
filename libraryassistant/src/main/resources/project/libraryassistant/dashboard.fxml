@@ -368,7 +368,7 @@
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="manage_student_form" layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="manage_student_form" layoutX="147.0" layoutY="96.0" prefHeight="591.3333333333334" prefWidth="834.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="65.0" layoutY="23.0" prefHeight="551.0" prefWidth="312.0" styleClass="detail_member" stylesheets="@manageMember.css" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="20.0">
                            <children>
@@ -416,17 +416,22 @@
                                  </font>
                               </TextField>
                               <FontAwesomeIconView glyphName="BOOKMARK" layoutX="31.0" layoutY="383.0" size="30" />
-                              <Button fx:id="add_student_btn" layoutX="60.0" layoutY="409.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="ADD">
+                              <Button fx:id="add_student_btn" layoutX="60.0" layoutY="409.0" mnemonicParsing="false" onAction="#addStudent" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="ADD">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Button>
-                              <Button fx:id="delete_student_btn" layoutX="169.0" layoutY="409.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="DELETE">
+                              <Button fx:id="delete_student_btn" layoutX="169.0" layoutY="409.0" mnemonicParsing="false" onAction="#deleteStudent" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="DELETE">
                                  <font>
                                     <Font size="15.0" />
                                  </font>
                               </Button>
                               <ComboBox fx:id="university_student" layoutX="58.0" layoutY="272.0" prefHeight="37.0" prefWidth="239.0" promptText="University " />
+                              <Button fx:id="update_student_btn" layoutX="111.0" layoutY="464.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="89.0" styleClass="btn_member" stylesheets="@manageMember.css" text="UPDATE">
+                                 <font>
+                                    <Font size="15.0" />
+                                 </font>
+                              </Button>
                            </children></AnchorPane>
                         <AnchorPane layoutX="405.0" layoutY="77.0" prefHeight="286.0" prefWidth="461.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="55.0">
                            <children>
@@ -603,7 +608,7 @@
                            </font></Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
                            <children>

@@ -1,46 +1,50 @@
 package project.libraryassistant;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 public class Student {
-    private String id;
-    private String name;
-    private String university;
-    private String faculty;
+    private StringProperty id;
+    private StringProperty name;
+    private StringProperty university;
+    private StringProperty faculty;
 
     public Student(String id, String name, String university, String faculty) {
-        this.id = id;
-        this.name = name;
-        this.university = university;
-        this.faculty = faculty;
+        this.id = new SimpleStringProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.university = new SimpleStringProperty(university);
+        this.faculty = new SimpleStringProperty(faculty);
     }
 
     public String getId() {
-        return id;
+        return id.get();
     }
+
     public void setId(String id) {
-        this.id = id;
+        this.id.set(id);
     }
 
     public String getName() {
-        return name;
+        return name.get();
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name.set(name);
     }
 
     public String getUniversity() {
-        return university;
+        return university.get();
     }
 
     public void setUniversity(String university) {
-        this.university = university;
+        this.university.set(university);
     }
 
     public String getFaculty() {
-        return faculty;
+        return faculty.get();
     }
 
     public void setFaculty(String faculty) {
-        this.faculty = faculty;
+        this.faculty.set(faculty);
     }
 }
