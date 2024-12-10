@@ -437,8 +437,8 @@
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <TextField fx:id="search_student" layoutX="354.0" layoutY="20.0" promptText="Student ID" styleClass="search_field" stylesheets="@manageMember.css" />
-                        <Button fx:id="search_student_btn" layoutX="509.0" layoutY="21.0" mnemonicParsing="false" styleClass="search_btn" stylesheets="@manageMember.css">
+                        <TextField fx:id="search_student" layoutX="354.0" layoutY="20.0" promptText="Student ID" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.topAnchor="20.0" />
+                        <Button fx:id="search_student_btn" layoutX="509.0" layoutY="21.0" mnemonicParsing="false" onAction="#searchStudent" styleClass="search_btn" stylesheets="@manageMember.css">
                            <graphic>
                               <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
                            </graphic>
@@ -471,6 +471,11 @@
                               </Label>
                            </children>
                         </AnchorPane>
+                        <Button fx:id="return_student_table" minWidth="44.0" mnemonicParsing="false" onAction="#return_student_table" prefHeight="28.0" prefWidth="44.0" styleClass="calenderbutton" AnchorPane.leftAnchor="770.0" AnchorPane.topAnchor="20.0">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" tabSize="0" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
 
@@ -600,7 +605,7 @@
                            </font></Label>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="manage_book_form" layoutX="10.0" layoutY="10.0" prefHeight="601.3333333333334" prefWidth="844.6666666666666" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <AnchorPane layoutX="308.0" layoutY="20.0" prefHeight="571.0" prefWidth="512.0" styleClass="board_book" stylesheets="@manageBook.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="10.0">
                            <children>
@@ -688,10 +693,21 @@
                            </children>
                         </AnchorPane>
                         <Line endX="-7.666717529296875" endY="349.0555725097656" layoutX="302.0" layoutY="220.0" opacity="0.5" startX="-7.66668701171875" startY="-188.74403381347656" stroke="#aea7a7" AnchorPane.bottomAnchor="30.0" />
+                        <TextField fx:id="search_book_title" layoutX="587.6666666666666" layoutY="22.0" promptText="Book Titile" styleClass="search_field" stylesheets="@manageMember.css" AnchorPane.leftAnchor="587.6666666666666" AnchorPane.topAnchor="22.0" />
+                        <Button fx:id="search_book_btn" layoutX="743.0" layoutY="23.333333333333332" mnemonicParsing="false" onAction="#searchBooks" styleClass="search_btn" stylesheets="@manageMember.css" AnchorPane.leftAnchor="743.0" AnchorPane.topAnchor="23.333333333333332">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="SEARCH" size="15" text="" />
+                           </graphic>
+                        </Button>
+                        <Button fx:id="return_book_table_btn" layoutX="780.0" layoutY="22.0" minWidth="44.0" mnemonicParsing="false" onAction="#resetBookTable" prefHeight="28.0" prefWidth="44.0" styleClass="calenderbutton">
+                           <graphic>
+                              <FontAwesomeIconView fill="WHITE" glyphName="ARROW_LEFT" size="20" tabSize="0" />
+                           </graphic>
+                        </Button>
                      </children>
                   </AnchorPane>
 
-                  <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="view_issued_book_form" prefHeight="592.0" prefWidth="838.4" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView fx:id="issued_book_table" layoutX="26.0" layoutY="160.0" prefHeight="414.0" prefWidth="787.0">
                            <columns>

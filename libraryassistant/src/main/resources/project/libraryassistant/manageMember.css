@@ -35,6 +35,10 @@
     -fx-background-color: #F2DDDC;
 }
 
+.search_btn_active {
+    -fx-background-color: #F2DDDC;
+}
+
 .text_info {
     -fx-background-color: transparent;
     -fx-border-width: 0px 0px 1px 0px;

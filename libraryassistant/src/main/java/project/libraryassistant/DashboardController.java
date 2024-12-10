@@ -270,8 +270,11 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
-            
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             home_page.getStyleClass().add("bt_active");
             home_page_hl.getStyleClass().add("bt_half_left_active");
@@ -286,6 +289,11 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+
             manage_book.getStyleClass().add("bt_active");
             manage_book_hl.getStyleClass().add("bt_half_left_active");
 
@@ -298,6 +306,11 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
+
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             manage_student.getStyleClass().add("bt_active");
             manage_student_hl.getStyleClass().add("bt_half_left_active");
@@ -312,6 +325,11 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+
             issue_book.getStyleClass().add("bt_active");
             issue_book_hl.getStyleClass().add("bt_half_left_active");
 
@@ -325,6 +343,11 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(true);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+
             return_book.getStyleClass().add("bt_active");
             return_book_hl.getStyleClass().add("bt_half_left_active");
 
@@ -337,6 +360,11 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(true);
             return_book_form.setVisible(false);
+
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             view_issued_book.getStyleClass().add("bt_active");
             view_issued_book_hl.getStyleClass().add("bt_half_left_active");
@@ -363,6 +391,7 @@ public class DashboardController {
         view_issued_book_hl.getStyleClass().removeAll("bt_half_left_active");
 
 
+
         // Gán class "bt_active" cho nút được nhấn
         if (event.getSource() == home_page_hl) {
             home_page_form.setVisible(true);
@@ -373,6 +402,10 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             home_page.getStyleClass().add("bt_active");
             home_page_hl.getStyleClass().add("bt_half_left_active");
@@ -386,6 +419,11 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
+
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
             
             manage_book.getStyleClass().add("bt_active");
             manage_book_hl.getStyleClass().add("bt_half_left_active");
@@ -400,6 +438,11 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+
             manage_student.getStyleClass().add("bt_active");
             manage_student_hl.getStyleClass().add("bt_half_left_active");
 
@@ -412,6 +455,11 @@ public class DashboardController {
             issue_book_form.setVisible(true);
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(false);
+
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             issue_book.getStyleClass().add("bt_active");
             issue_book_hl.getStyleClass().add("bt_half_left_active");
@@ -426,6 +474,11 @@ public class DashboardController {
             view_issued_book_form.setVisible(false);
             return_book_form.setVisible(true);
 
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
+
             return_book.getStyleClass().add("bt_active");
             return_book_hl.getStyleClass().add("bt_half_left_active");
 
@@ -438,6 +491,11 @@ public class DashboardController {
             issue_book_form.setVisible(false);
             view_issued_book_form.setVisible(true);
             return_book_form.setVisible(false);
+
+            clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+            clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
+                    author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
 
             view_issued_book.getStyleClass().add("bt_active");
             view_issued_book_hl.getStyleClass().add("bt_half_left_active");
@@ -618,13 +676,15 @@ public class DashboardController {
         Student newStudent = new Student(id, name, university, faculty);
         studentList.add(newStudent);
         db_student.saveStudent(FXCollections.observableArrayList(newStudent));
+        student_table.getSelectionModel().clearSelection();
 
         clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student added to the table successfully!");
         alert.show();
 
-        student_table.setItems(studentList);
+        student_table.setItems(FXCollections.observableArrayList(studentList));
         student_table.refresh();
         calculateTotalStudent();
     }
@@ -633,13 +693,20 @@ public class DashboardController {
     private void deleteStudent() {
         // Lấy sách được chọn từ bảng
         Student selectedStudent = student_table.getSelectionModel().getSelectedItem();
-
+        for (IssuedBook issuedBooks : issuedBookList) {
+            if (issuedBooks.getStudentID().equals(selectedStudent.getId())) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "You can't delete this student!");
+                alert.show();
+                return;
+            }
+        }
         if (selectedStudent != null) {
             // Xóa sách khỏi danh sách
             studentList.remove(selectedStudent);
             db_student.deleteStudent(selectedStudent.getId());
 
             // Làm mới lại bảng
+            student_table.getSelectionModel().clearSelection();
             student_table.setItems(FXCollections.observableArrayList(studentList));
             student_table.refresh();
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student deleted successfully!");
@@ -654,6 +721,52 @@ public class DashboardController {
         } else {
             System.out.println("No student selected to delete!");
         }
+    }
+
+    @FXML
+    void searchStudent() {
+        String student_id = search_student.getText();
+        if (student_id == null || student_id.trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Enter student id!");
+            alert.show();
+            return;
+        }
+
+        student_id = student_id.trim();
+
+        ObservableList<Student> searchResults = FXCollections.observableArrayList();
+
+        for (Student student : studentList) {
+            if (student.getId().contains(student_id)) {
+                searchResults.add(student);
+            }
+        }
+
+        search_student_btn.getStyleClass().add("search_btn_active");
+        if (searchResults.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Student not found!");
+            alert.show();
+            student_table.setItems(searchResults);
+            student_table.refresh();
+            return;
+        }
+        
+        student_table.setItems(searchResults);
+        student_table.refresh();
+        clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Search students successfully!");
+        alert.show();
+    }
+
+    @FXML
+    void return_student_table() {
+        search_student_btn.getStyleClass().removeAll("search_btn_active");
+        clearFieldsStudent(id_student, name_student, university_faculty, university_student);
+        student_table.getSelectionModel().clearSelection();
+        search_student.setText(null);
+        student_table.setItems(studentList);
+        student_table.refresh();
+
     }
 
 
@@ -710,6 +823,15 @@ public class DashboardController {
 
     @FXML
     private TextField title_book;
+
+    @FXML
+    private TextField search_book_title;
+
+    @FXML
+    private Button search_book_btn;
+
+    @FXML
+    private Button return_book_table_btn;
 
     @FXML
     public void return_manage_book(ActionEvent event) {
@@ -822,9 +944,9 @@ public class DashboardController {
         selected.setGenre(genre);
         selected.setQuantity(quantity);
 
-        boolean updateSucess = db_book.updateBookInDatabase(selected);
+        boolean updateSuccess = db_book.updateBookInDatabase(selected);
 
-        if (updateSucess) {
+        if (updateSuccess) {
             for (int i = 0; i < addedBookList.size(); i++) {
                 if (addedBookList.get(i).getId().equals(id)) {
                     addedBookList.set(i, selected);
@@ -841,6 +963,61 @@ public class DashboardController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to update book!");
             alert.show();
         }
+    }
+
+
+    @FXML
+    void searchBooks() {
+        // Lấy văn bản từ TextField tìm kiếm (giả sử bạn có một TextField tên là `searchField`)
+        String searchText = search_book_title.getText();
+
+        // Kiểm tra xem ô tìm kiếm có trống không
+        if (searchText == null || searchText.trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Enter text to search!");
+            alert.show();
+            return;
+        }
+        searchText = searchText.trim().toLowerCase();
+
+        // Danh sách kết quả tìm kiếm
+        ObservableList<Book> searchResults = FXCollections.observableArrayList();
+
+        // Duyệt qua danh sách sách hiện tại để kiểm tra
+        for (Book book : addedBookList) {
+            if (book.getTitle().toLowerCase().contains(searchText)) {
+                searchResults.add(book);
+            }
+        }
+
+        search_book_btn.getStyleClass().add("search_btn_active");
+        // Nếu không tìm thấy kết quả
+        if (searchResults.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "No books found matching the search text.");
+            alert.show();
+            book_table_manage.setItems(searchResults);
+            book_table_manage.refresh();
+            return;
+        }
+
+        // Hiển thị kết quả tìm kiếm trên bảng
+        book_table_manage.getSelectionModel().clearSelection();
+        book_table_manage.setItems(searchResults);
+        book_table_manage.refresh();
+        clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Search books successfully!");
+        alert.show();
+    }
+
+    @FXML
+    void resetBookTable() {
+        search_book_btn.getStyleClass().removeAll("search_btn_active");
+        clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+        book_table_manage.getSelectionModel().clearSelection();
+        search_book_title.setText(null);
+        book_table_manage.setItems(addedBookList);
+        book_table_manage.refresh();
+
     }
     /**
      * issue book.
@@ -1133,6 +1310,7 @@ public class DashboardController {
     List<University> universities = University.getUniversities();
     @FXML
     public void initialize() {
+        search_student_btn.getStyleClass().removeAll("search_btn_active");
 
         universities.forEach(u -> university_student.getItems().add(u.getName()));
         university_student.setOnAction(event -> {
@@ -1219,19 +1397,15 @@ public class DashboardController {
             // Xóa sách khỏi danh sách
             addedBookList.remove(selectedBook);
             db_book.deleteBookFromDatabase(selectedBook.getId());
-
+            book_table_manage.getSelectionModel().clearSelection();
             // Làm mới lại bảng
-            book_table_manage.setItems(FXCollections.observableArrayList(addedBookList));
+            ///book_table_manage.setItems(FXCollections.observableArrayList(addedBookList));
             book_table_manage.refresh();
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book deleted successfully!");
             alert.show();
             calculateTotalBook();
-            // Chọn dòng cuối cùng nếu danh sách không trống
-            if (!addedBookList.isEmpty()) {
-                book_table_manage.getSelectionModel().selectLast();
-            } else {
-                clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
-            }
+            clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+
         } else {
             System.out.println("No book selected to delete!");
         }
@@ -1251,10 +1425,12 @@ public class DashboardController {
         // Xóa nội dung TextField
         idField.clear();
         nameField.clear();
-        universityComboBox.getSelectionModel().clearSelection();
+        facultyField.setValue(null);
+        facultyField.getEditor().clear();
 
         // Đặt ComboBox về giá trị mặc định (hoặc xóa chọn)
-        universityComboBox.getSelectionModel().clearSelection();
+        universityComboBox.setValue(null);
+        universityComboBox.getEditor().clear();
     }
 
     @FXML
