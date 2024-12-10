@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -32,6 +33,11 @@ public class HelloController {
     private TextField username;
 
     @FXML
+    private AnchorPane login_form;
+
+    @FXML
+    private AnchorPane sign_up_form;
+    @FXML
     public void minimize() {
         Stage stage = (Stage) minimize.getScene().getWindow();
         stage.setIconified(true);
@@ -46,6 +52,17 @@ public class HelloController {
     private PreparedStatement prepare;
     private ResultSet rs;
 
+    @FXML
+    private void signup_form() {
+        login_form.setVisible(false);
+        sign_up_form.setVisible(true);
+    }
+
+    @FXML
+    private void loginForm() {
+        login_form.setVisible(true);
+        sign_up_form.setVisible(false);
+    }
     public void login() {
         String sql = "SELECT * FROM admin where username = ? and password = ?";
         connect = DatabaseLogin.getConnection();

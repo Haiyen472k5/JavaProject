@@ -780,17 +780,119 @@ public class DashboardController {
         book_table_manage.refresh();
         calculateTotalBook();
     }
+
+    @FXML
+    private void updateBook() {
+        Book selected = book_table_manage.getSelectionModel().getSelectedItem();
+
+        if (selected == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please select a book from the source table.");
+            alert.show();
+            return;
+        }
+        String id = id_book_manage.getText().trim();
+
+        // Ngăn thay đổi ID
+        if (!id.equals(selected.getId())) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "You cannot change the Book ID!");
+            alert.show();
+            id_book_manage.setText(selected.getId()); // Khôi phục ID cũ
+            return;
+        }
+
+        String title = title_book_manage.getText().trim();
+        String author = author_book_manage.getText().trim();
+        String genre = genre_book_manage.getText().trim();
+        String quantityText = quantity_book_manage.getText().trim();
+
+        if(title == null || author == null || genre == null || quantityText == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields.");
+            alert.show();
+            return;
+        }
+
+
+        int quantity;
+        try {
+            quantity = Integer.parseInt(quantityText);
+            if (quantity <= 0) throw new NumberFormatException();
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Quantity must be a positive integer.");
+            alert.show();
+            return;
+        }
+
+        selected.setTitle(title);
+        selected.setAuthor(author);
+        selected.setGenre(genre);
+        selected.setQuantity(quantity);
+
+        boolean updateSucess = db_book.updateBookInDatabase(selected);
+
+        if (updateSucess) {
+            for (int i = 0; i < addedBookList.size(); i++) {
+                if (addedBookList.get(i).getId().equals(id)) {
+                    addedBookList.set(i, selected);
+                    break;
+                }
+            }
+
+            book_table_manage.refresh();
+
+
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book updated successfully!");
+            alert.show();
+        } else {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Failed to update book!");
+            alert.show();
+        }
+    }
     /**
      * issue book.
      */
     @FXML
     private AnchorPane issue_book_form;
 
+    @FXML
+    private TextField id_issue;
+
+    @FXML
+    private TextField id_student_issue;
+
+    @FXML
+    private TextField id_book_issue;
+
+    @FXML
+    private DatePicker issue_date;
+
+    @FXML
+    private DatePicker due_date;
+
+    @FXML
+    private ImageView image_book_detail;
+
+    @FXML
+    private TextField id_book_detail;
+
+    @FXML
+    private TextField name_book_detail;
+
+    @FXML
+    private TextField author_book_detail;
+
+    @FXML
+    private TextField genre_book_detail;
+
+    @FXML
+    private TextField quantity_book_detail;
+
     /**
      * view issue book form.
      */
     @FXML
     private AnchorPane view_issued_book_form;
+
+
 
     /**
      * return book.
@@ -1010,7 +1112,7 @@ public class DashboardController {
 
             for (JsonNode item : items) {
                 JsonNode volumeInfo = item.path("volumeInfo");
-                String id = item.path("id").asText();
+                String id = generateCustomBookID(volumeInfo.path("title").asText());
                 String title = volumeInfo.path("title").asText("Unknown Title");
                 String author = volumeInfo.path("authors").isMissingNode() ? "Unknown Author"
                         : volumeInfo.path("authors").toString();
@@ -1030,10 +1132,17 @@ public class DashboardController {
         }
     }
 
+    private String generateCustomBookID(String title) {
+        String prefix = "BK"; // Tiền tố cho "Book"
+        String suffix = Integer.toHexString(title.hashCode()).toUpperCase(); // Sinh mã băm từ tiêu đề
+        String randomPart = Long.toHexString(System.nanoTime()).substring(0, 4).toUpperCase(); // Phần ngẫu nhiên
+        return prefix + "-" + suffix.substring(0, 4) + randomPart; // Kết hợp các phần
+    }
+
     private String fetchBooksFromGoogleAPI(String keyword) throws Exception {
         OkHttpClient client = new OkHttpClient();
 
-        String url = "https://www.googleapis.com/books/v1/volumes?q=" + keyword;
+        String url = "https://www.googleapis.com/books/v1/volumes?q=" + keyword + "&maxResults=40&key=AIzaSyAE5rH654BuA54v4B12Qucy0PnSOW6O5lA";
 
         Request request = new Request.Builder()
                 .url(url)

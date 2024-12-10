@@ -78,6 +78,26 @@ public class DatabaseBook {
 
     }
 
+    public boolean updateBookInDatabase(Book book) {
+        String sql = "UPDATE book SET title = ?, author = ?, genre = ?, quantity = ?, image = ? WHERE id = ?";
+        try (Connection connect = getConnection(); PreparedStatement pstmt = connect.prepareStatement(sql)) {
+            // Thiết lập các tham số
+            pstmt.setString(1, book.getTitle());
+            pstmt.setString(2, book.getAuthor());
+            pstmt.setString(3, book.getGenre());
+            pstmt.setInt(4, book.getQuantity());
+            pstmt.setString(5, book.getCoverImageUrl());
+            pstmt.setString(6, book.getId());
+
+            // Thực thi truy vấn
+           int rowAffected = pstmt.executeUpdate();
+            return rowAffected > 0; // Trả về true nếu có bản ghi được cập nhật
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public static void main(String[] args) {
         getConnection();

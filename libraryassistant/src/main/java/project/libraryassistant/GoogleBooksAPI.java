@@ -14,6 +14,7 @@ public class GoogleBooksAPI {
     private static final String API_KEY = "AIzaSyAE5rH654BuA54v4B12Qucy0PnSOW6O5lA"; // Replace with your API key
 
     public static String searchBooks(String query) throws Exception {
+
         String urlString = API_URL + query + "&key=" + API_KEY;
         URL url = new URL(urlString);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
