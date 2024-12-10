@@ -52,7 +52,7 @@ public class GoogleBooksAPI {
             String genre = categoriesNode.isArray() ? categoriesNode.get(0).asText() : "Unknown";
 
             // Parse Quantity (default to 1)
-            int quantity = 15; // Không có từ API, cần thêm mặc định.
+            int quantity = 5; // Không có từ API, cần thêm mặc định.
 
             // Output hoặc xử lý dữ liệu
             System.out.println("ID: " + id);

@@ -10,7 +10,7 @@ public class DatabaseLogin {
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(URL, USER, "");
+            connection = DriverManager.getConnection(URL, USER, "1234");
             System.out.println("Kết nối thành công!");
         } catch (SQLException e) {
             System.out.println("Kết nối thất bại!");

@@ -33,6 +33,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Arrays;
+import java.util.Map;
+
 public class DashboardController {
     /// top
     @FXML
@@ -546,6 +551,8 @@ public class DashboardController {
     /**
      * manage student.
      */
+    private ObservableList<Student> addedStudentsList = FXCollections.observableArrayList();
+    private final DatabaseStudent db_student = new DatabaseStudent();
 
     @FXML
     private AnchorPane manage_student_form;
@@ -554,6 +561,9 @@ public class DashboardController {
     private TextField search_student;
 
     @FXML Button search_student_btn;
+
+    @FXML
+    private TableView<Student> student_table;
 
     @FXML
     private TableColumn<Student, String> col_student_faculty;
@@ -569,6 +579,9 @@ public class DashboardController {
 
     @FXML
     private ComboBox<String> university_student;
+
+    @FXML
+    private ComboBox<String> university_faculty;
 
     @FXML
     private TextField id_student;
@@ -729,13 +742,10 @@ public class DashboardController {
     @FXML
     private AnchorPane view_return_book_form;
 
-
-
-
     private ObservableList<Book> bookList = FXCollections.observableArrayList();
+    private ObservableList<Student> studentList = FXCollections.observableArrayList();
 
-
-    private String[] uni = {"UET", "ULIS", "UEB", "UEd", "VJU", "UL", "HUS", "UMP", "IS", "SIS"};
+    List<University> universities = University.getUniversities();
 
     public void connectBook(TableColumn<Book, String> id_col, TableColumn<Book, String> title_col, TableColumn<Book, String> author_col,
                             TableColumn<Book, String> genre_col, TableColumn<Book, Integer> quantity_col, TableView<Book> bookTable,
@@ -770,7 +780,24 @@ public class DashboardController {
     }
     @FXML
     public void initialize() {
-        university_student.getItems().addAll(uni);
+        universities.forEach(u -> university_student.getItems().add(u.getName()));
+        university_student.setOnAction(event -> {
+            String selectedUniversity = university_student.getValue();
+            if (selectedUniversity != null) {
+                // Tìm trường đại học tương ứng từ danh sách
+                University university = universities.stream()
+                        .filter(u -> u.getName().equals(selectedUniversity))
+                        .findFirst()
+                        .orElse(null);
+
+                // Cập nhật danh sách khoa cho trường đại học đã chọn
+                if (university != null) {
+                    university_faculty.getItems().clear();  // Xóa danh sách khoa cũ
+                    university_faculty.getItems().addAll(university.getFaculties());  // Thêm các khoa của trường đại học
+                }
+            }
+        });
+
 
         home_page.getStyleClass().add("bt_active"); // Home Page mặc định là nút "active"
         manage_book.getStyleClass().add("bt");
@@ -805,13 +832,17 @@ public class DashboardController {
         book_table_manage.setItems(addedBookList);
         calculateTotalQuantity();
 
-
         connectBook(col_book_id, col_book_title, col_book_author, col_book_genre, col_book_quantity, book_table,
                     id_book, title_book, author_book, genre_book, quantity_book, bookCoverImageView, bookList);
 
         connectBook(col_book_id_manage, col_book_title_manage, col_book_author_manage, col_book_genre_manage, col_book_quantity_manage, book_table_manage,
                     id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage, addedBookList);
 
+        //manage student
+        addedStudentsList = db_student.loadStudents();
+        student_table.setItems(addedStudentsList);
+        connectStudents(col_student_id, col_student_name, col_student_university, col_student_faculty, student_table, id_student, name_student, university_student,
+                        university_faculty, studentList);
     }
 
     @FXML
@@ -887,12 +918,6 @@ public class DashboardController {
             quantity_book.setText("5"); // Mặc định số lượng là 5
             id_book.setText(firstBook.path("id").asText());
 
-            // Hiển thị thông báo
-            /*
-            Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book details filled successfully.");
-            alert.show();
-            */
-
             for (JsonNode item : items) {
                 JsonNode volumeInfo = item.path("volumeInfo");
                 String id = item.path("id").asText();
@@ -918,7 +943,7 @@ public class DashboardController {
     private String fetchBooksFromGoogleAPI(String keyword) throws Exception {
         OkHttpClient client = new OkHttpClient();
 
-        String url = "https://www.googleapis.com/books/v1/volumes?q=" + keyword;
+        String url = "https://www.googleapis.com/books/v1/volumes?q=" + keyword + "&maxResults=40&key=AIzaSyAE5rH654BuA54v4B12Qucy0PnSOW6O5lA";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -935,5 +960,85 @@ public class DashboardController {
         // Lưu danh sách sách khi đóng chương trình
         db_book.saveBooks(addedBookList);
         System.out.println("Books saved successfully on close!");
+
     }
+
+    // manage user
+    public void connectStudents(TableColumn<Student, String> col_student_id,
+                                TableColumn<Student, String> col_student_name,
+                                TableColumn<Student, String> col_student_university,
+                                TableColumn<Student, String> col_student_faculty,
+                                TableView<Student> student_table,
+                                TextField id_student,
+                                TextField name_student,
+                                ComboBox<String> university_student,
+                                ComboBox<String> university_faculty,
+                                ObservableList<Student> studentList) {
+        col_student_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_student_name.setCellValueFactory(new PropertyValueFactory<>("name"));
+        col_student_university.setCellValueFactory(new PropertyValueFactory<>("university"));
+        col_student_faculty.setCellValueFactory(new PropertyValueFactory<>("faculty"));
+
+        student_table.setItems(studentList);
+
+        student_table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                id_student.setText(newSelection.getId());
+                name_student.setText(newSelection.getName());
+                university_student.setValue(newSelection.getUniversity());
+                university_faculty.setValue(newSelection.getFaculty());
+            }
+        });
+    }
+
+    @FXML
+    private void addStudent() {
+        // Lấy thông tin từ các trường nhập liệu
+        String studentId = id_student.getText().trim();
+        String name = name_student.getText().trim();
+        String university = university_student.getValue(); // Lấy giá trị từ ComboBox
+        String faculty = university_faculty.getValue(); // Lấy giá trị từ ComboBox
+
+        // Kiểm tra các trường nhập liệu không được bỏ trống
+        if (studentId.isEmpty() || name.isEmpty() || university == null || faculty == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "All fields are required!");
+            alert.show();
+            return;
+        }
+
+        // Kiểm tra trùng ID trong danh sách sinh viên
+        for (Student student : studentList) {
+            if (student.getId().equals(studentId)) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "A student with this ID already exists in the table.");
+                alert.show();
+                return;
+            }
+        }
+
+        // Thêm sinh viên mới vào danh sách
+        Student newStudent = new Student(studentId, name, university, faculty);
+        studentList.add(newStudent);
+
+        // Lưu vào cơ sở dữ liệu
+        db_student.saveStudents(FXCollections.observableArrayList(newStudent));
+
+        // Làm sạch các trường nhập liệu
+        clearFields(id_student, name_student, university_student, university_faculty);
+
+        // Hiển thị thông báo thành công
+        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Student added to the table successfully!");
+        alert.show();
+
+        // Cập nhật TableView
+        student_table.setItems(studentList);
+        student_table.refresh();
+    }
+
+    private void clearFields(TextField id_student, TextField name_student, ComboBox<String> university_student, ComboBox<String> faculty_student) {
+        id_student.clear();
+        name_student.clear();
+        university_student.setValue(null);
+        faculty_student.setValue(null);
+    }
+
 }

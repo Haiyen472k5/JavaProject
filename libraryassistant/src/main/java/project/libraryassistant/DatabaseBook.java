@@ -9,11 +9,11 @@ import javafx.stage.Stage;
 
 public class DatabaseBook {
     private static final String URL = "jdbc:mysql://localhost:3307/managebook"; // Thay bằng URL của bạn
-    private static final String USER = "root"; // Tên người dùng MySQ
+    private static final String USER = "root"; // Tên người dùng MySQL
     public static Connection getConnection() {
         Connection connection = null;
         try {
-            connection = DriverManager.getConnection(URL, USER, "");
+            connection = DriverManager.getConnection(URL, USER, "1234");
             System.out.println("Kết nối thành công!");
         } catch (SQLException e) {
             System.out.println("Kết nối thất bại!");
