@@ -34,9 +34,6 @@ public class HelloController {
     @FXML
     private TextField account;
 
-    private String account_name;
-
-
     @FXML
     private AnchorPane login_form;
 
@@ -129,9 +126,6 @@ public class HelloController {
         }
     }
 
-    public String getAccountNumber() {
-        return accountNumber;
-    }
 
     public void login() {
         String sql = "SELECT * FROM admin where account = ? and password = ?";

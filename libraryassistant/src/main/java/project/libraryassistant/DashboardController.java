@@ -35,6 +35,7 @@ import okhttp3.Response;
 import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -832,6 +833,10 @@ public class DashboardController {
     private void deleteStudent() {
         // Lấy sách được chọn từ bảng
         Student selectedStudent = student_table.getSelectionModel().getSelectedItem();
+        if (selectedStudent == null) {
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Please select a student to delete.");
+            return;
+        }
         for (IssuedBook issuedBooks : issuedBookList) {
             if (issuedBooks.getStudentID().equals(selectedStudent.getId())) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "You can't delete this student!");
@@ -1206,22 +1211,14 @@ public class DashboardController {
         clearFieldsIssueBook(id_issue, id_student_issue, id_book_issue, issue_date, due_date, id_book_detail, name_book_detail,
                 author_book_detail, genre_book_detail, quantity_book_detail, image_book_detail);
     }
-    private boolean checkSucess = false;
+    private boolean checkSuccess = false;
     @FXML
     void check_available_issue() {
-        String id_issue = id_book_issue.getText().trim();
         String id_student = id_student_issue.getText().trim();
         String id_book = id_book_issue.getText().trim();
-        LocalDate issueDate = issue_date.getValue();
-        LocalDate dueDate = due_date.getValue();
-        if (id_issue == null || id_student == null || id_book == null || issueDate == null || dueDate == null) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields.");
-            alert.show();
-            return;
-        }
 
-        if (issueDate.compareTo(dueDate) >= 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Date invalid.");
+        if (id_student == null || id_book == null) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please enter both Book ID and Student ID.");
             alert.show();
             return;
         }
@@ -1236,8 +1233,7 @@ public class DashboardController {
             }
         }
         if (check_student == false) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Student does not exist!");
-            alert.show();
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Student does not exist!");
             return;
         }
 
@@ -1249,11 +1245,9 @@ public class DashboardController {
             }
         }
         if (check_book == false) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Book does not exist!");
-            alert.show();
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Book does not exist!");
             return;
         }
-
         id_book_detail.setText(detail_book.getId());
         name_book_detail.setText(detail_book.getTitle());
         author_book_detail.setText(detail_book.getAuthor());
@@ -1261,39 +1255,40 @@ public class DashboardController {
         quantity_book_detail.setText(String.valueOf(detail_book.getQuantity()));
         Image coverImage = new Image(detail_book.getCoverImageUrl(), true);
         image_book_detail.setImage(coverImage);
-        checkSucess = true;
-
+        checkSuccess = true;
     }
 
+    ///  Tính tổng số sách đang mượn
     private void calculateTotalIssuedBook() {
         ObservableList<IssuedBook> issuedBooks = issued_book_table.getItems();
-
         // Tính tổng quantity
         int totalStudent = issuedBooks.size();
 
         // Hiển thị kết quả (nếu có label)
         no_issued.setText(String.valueOf(totalStudent));
     }
+    /// mượn sách
     @FXML
     void record() {
-
         String student_id_record = id_student_issue.getText().trim();
         String book_id_record = id_book_issue.getText().trim();
-        String issue_date_record = issue_date.getValue().toString().trim();
-        String due_date_record = due_date.getValue().toString().trim();
+        LocalDate issueDate = issue_date.getValue();
+        LocalDate dueDate = due_date.getValue();
         String status = "Pending";
 
-        if (checkSucess == false) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Toi canh cao elms!");
-            alert.show();
+        if (checkSuccess == false || issueDate == null || dueDate == null) {
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Cannot record book.");
+            return;
+        }
+        if (issueDate.compareTo(dueDate) >= 0) {
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Invalid date.");
             return;
         }
         id_issue.setText(generateIssuedID());
         String issue_id_record = id_issue.getText().trim();
         for (IssuedBook issuedBook : issuedBookList) {
             if (issuedBook.getIssuedID().equals(issue_id_record)) {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "This issue id already exists!");
-                alert.show();
+                showAlert(Alert.AlertType.WARNING, "WARNING", "Book already exists.");
                 return;
             }
         }
@@ -1306,8 +1301,7 @@ public class DashboardController {
                 bookName = addedBookList.get(i).getTitle();
                 urlImage = addedBookList.get(i).getCoverImageUrl();
                 if (quantity == 0) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING, "Het sach roi ban eei!");
-                    alert.show();
+                    showAlert(Alert.AlertType.WARNING, "WARNING", "This book is out of stock.");
                     return;
                 }
                 issued_book = addedBookList.get(i);
@@ -1319,11 +1313,15 @@ public class DashboardController {
             }
         }
 
-        IssuedBook newBook = new IssuedBook(issue_id_record, student_id_record, bookName , issue_date_record, due_date_record, status, urlImage, book_id_record);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String issue_date = issueDate.format(formatter);
+        String due_date = dueDate.format(formatter);
+
+
+        IssuedBook newBook = new IssuedBook(issue_id_record, student_id_record, bookName , issue_date, due_date, status, urlImage, book_id_record);
         issuedBookList.add(newBook);
         db_issuedBook.saveIssuedBooks(FXCollections.observableArrayList(newBook));
-        Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book added to the table successfully!");
-        alert.show();
+        showAlert(Alert.AlertType.INFORMATION, "SUCCESS", "Book added to the table successfully!");
 
         issued_book_table.setItems(issuedBookList);
         issued_book_table.refresh();
@@ -1387,8 +1385,7 @@ public class DashboardController {
 
         // Kiểm tra xem ô tìm kiếm có trống không
         if (searchText == null || searchText.trim().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Enter text to search!");
-            alert.show();
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Please enter search text.");
             return;
         }
         searchText = searchText.trim().toLowerCase();
@@ -1430,11 +1427,10 @@ public class DashboardController {
 
     }
 
-
-
     /**
      * return book.
      */
+
     @FXML
     private AnchorPane return_book_form;
 
@@ -1491,8 +1487,7 @@ public class DashboardController {
         String issueID = issueId_return.getText().trim();
 
         if (issueID.isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields!");
-            alert.show();
+            showAlert(Alert.AlertType.WARNING, "WARNING", "Please fill all fields!");
             return;
         }
 
@@ -1514,11 +1509,11 @@ public class DashboardController {
 
             } else {
                 clearIssueAvailPane();
-                Alert alert = new Alert(Alert.AlertType.WARNING, "No issue case found!");
-                alert.show();
+                showAlert(Alert.AlertType.WARNING, "WARNING", "No issue available.");
             }
         } catch (SQLException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong!");
+            alert.show();
             throw new RuntimeException(e);
         }
     }
@@ -1554,6 +1549,7 @@ public class DashboardController {
                 int lateDays = (int) ((returnDate.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24));
                 System.out.println("Days late: " + lateDays);
                 int latePenalty = 0;
+                if (lateDays <= 0)  lateDays = 0;
                 if (lateDays > 0) {
                     String lateQuery = "SELECT fine FROM returnbooklaterule WHERE ? BETWEEN min_days AND max_days";;
                     PreparedStatement lateStmt = connection.prepareStatement(lateQuery);
