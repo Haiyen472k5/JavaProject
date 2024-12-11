@@ -7,14 +7,18 @@ public class IssuedBook {
     private String issueDate;
     private String dueDate;
     private String status;
+    private String image;
+    private String bookID;
 
-    IssuedBook(String issueID, String studentID, String book_name, String issueDate, String dueDate, String status) {
+    IssuedBook(String issueID, String studentID, String book_name, String issueDate, String dueDate, String status, String image, String bookID) {
         this.issueID = issueID;
         this.studentID = studentID;
         this.book_name = book_name;
         this.issueDate = issueDate;
         this.dueDate = dueDate;
         this.status = status;
+        this.image = image;
+        this.bookID = bookID;
     }
 
     public String getIssuedID() {
@@ -39,5 +43,13 @@ public class IssuedBook {
 
     public String getStatus() {
         return status;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public String getBookID() {
+        return bookID;
     }
 }

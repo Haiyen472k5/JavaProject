@@ -21,10 +21,10 @@ public class DatabaseIssuedBook {
     }
 
     public void saveIssuedBooks(ObservableList<IssuedBook> books) {
-        String sql = "INSERT INTO issuedbook (issueID, studentID, bookName, issueDate, dueDate, status) "
-                + "VALUES (?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE "
+        String sql = "INSERT INTO issuedbook (issueID, studentID, bookName, issueDate, dueDate, status, image, bookID) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?) ON DUPLICATE KEY UPDATE "
                 + "issueID = VALUES(issueID), studentID = VALUES(studentID), bookName = VALUES(bookName),"
-                + "issueDate = VALUES(issueDate), dueDate = VALUES(dueDate), status = VALUES(status)";
+                + "issueDate = VALUES(issueDate), dueDate = VALUES(dueDate), status = VALUES(status), image = VALUES(image), bookID = VALUES(bookID);";
         try (Connection connect = getConnection(); PreparedStatement pstmt = connect.prepareStatement(sql)) {
             for (IssuedBook book : books) {
                 pstmt.setString(1, book.getIssuedID());
@@ -33,6 +33,8 @@ public class DatabaseIssuedBook {
                 pstmt.setString(4, book.getIssueDate());
                 pstmt.setString(5, book.getDueDate());
                 pstmt.setString(6, book.getStatus());
+                pstmt.setString(7, book.getImage());
+                pstmt.setString(8, book.getBookID());
                 pstmt.executeUpdate();
                 System.out.println("Success");
             }
@@ -54,7 +56,9 @@ public class DatabaseIssuedBook {
                         rs.getString("bookName"),
                         rs.getString("issueDate"),
                         rs.getString("dueDate"),
-                        rs.getString("status")
+                        rs.getString("status"),
+                        rs.getString("image"),
+                        rs.getString("bookID")
                 ));
             }
         } catch (Exception e) {
@@ -73,6 +77,7 @@ public class DatabaseIssuedBook {
             pstmt.setString(4, book.getIssueDate());
             pstmt.setString(5, book.getDueDate());
             pstmt.setString(6, book.getStatus());
+            pstmt.setString(7, book.getImage());
 
             // Thực thi truy vấn
             int rowAffected = pstmt.executeUpdate();

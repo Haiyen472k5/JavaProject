@@ -13,6 +13,7 @@ module project.libraryassistant {
     requires java.sql;
     requires com.fasterxml.jackson.databind;
     requires okhttp3;
+    requires mysql.connector.j;
     opens project.libraryassistant to javafx.fxml;
     exports project.libraryassistant;
 

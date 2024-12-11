@@ -20,7 +20,7 @@
                         <Font name="Lucida Calligraphy Italic" size="35.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="username" layoutX="51.0" layoutY="164.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <TextField fx:id="account" layoutX="51.0" layoutY="164.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
                   <Button fx:id="login_btn" layoutX="101.0" layoutY="247.0" mnemonicParsing="false" onAction="#login" prefHeight="28.0" prefWidth="85.0" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="WHITE">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
@@ -32,7 +32,7 @@
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Button layoutX="193.0" layoutY="295.0" mnemonicParsing="false" onAction="#signup_form" styleClass="signup_btn" stylesheets="@designLogin.css" text="Sign up" textFill="#fff4f4">
+                  <Button fx:id="sign_up_btn_login" layoutX="193.0" layoutY="295.0" mnemonicParsing="false" onAction="#signup_form" styleClass="signup_btn" stylesheets="@designLogin.css" text="Sign up" textFill="#fff4f4">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                      </font>
@@ -46,11 +46,11 @@
                         <Font name="Lucida Calligraphy Italic" size="35.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="username1" layoutX="50.0" layoutY="162.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
-                  <PasswordField fx:id="password1" layoutX="51.0" layoutY="197.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" styleClass="text-filed" stylesheets="@designLogin.css" />
-                  <TextField fx:id="username11" layoutX="51.0" layoutY="236.0" prefHeight="25.0" prefWidth="183.0" promptText="Username" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <TextField fx:id="account_register" layoutX="50.0" layoutY="162.0" prefHeight="25.0" prefWidth="183.0" promptText="ID Number" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <PasswordField fx:id="password_register" layoutX="51.0" layoutY="197.0" prefHeight="25.0" prefWidth="183.0" promptText="Password" styleClass="text-filed" stylesheets="@designLogin.css" />
+                  <TextField fx:id="username_register" layoutX="51.0" layoutY="236.0" prefHeight="25.0" prefWidth="183.0" promptText="Username" styleClass="text-filed" stylesheets="@designLogin.css" />
                   <FontAwesomeIconView glyphName="BOOK" layoutX="120.0" layoutY="89.0" size="50" />
-                  <Button fx:id="register_btn_signUp" layoutX="106.0" layoutY="281.0" mnemonicParsing="false" styleClass="signup_btn" stylesheets="@designLogin.css" text="Register" textFill="WHITE">
+                  <Button layoutX="106.0" layoutY="281.0" mnemonicParsing="false" onAction="#register" styleClass="signup_btn" stylesheets="@designLogin.css" text="Register" textFill="WHITE">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                      </font>
@@ -60,7 +60,7 @@
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <Button fx:id="login_btn_signUp" layoutX="176.0" layoutY="329.0" mnemonicParsing="false" onAction="#loginForm" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="#fffdfd">
+                  <Button fx:id="login_btn_register" layoutX="176.0" layoutY="329.0" mnemonicParsing="false" onAction="#loginForm" styleClass="loin-button" stylesheets="@designLogin.css" text="Login" textFill="#fffdfd">
                      <font>
                         <Font name="Berlin Sans FB Demi Bold" size="15.0" />
                      </font>

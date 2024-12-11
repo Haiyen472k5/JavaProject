@@ -18,22 +18,24 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import javafx.animation.Transition.*;
 
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.w3c.dom.Text;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
+import java.io.File;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 public class DashboardController {
@@ -182,7 +184,81 @@ public class DashboardController {
     private Circle circle_image;
 
     @FXML
+    private FontAwesomeIconView edit_icon;
+
+
+    private String imagePath;
+    private Image image = null;
+
+    public void insertImage() {
+        FileChooser open = new FileChooser();
+        open.setTitle("Image File");
+        open.getExtensionFilters().add(new FileChooser.ExtensionFilter("Image file", "*png", "*jpg"));
+        Stage stage = (Stage)left_form.getScene().getWindow();
+
+        File file = open.showOpenDialog(stage);
+
+        if (file != null) {
+            imagePath = file.getAbsolutePath().replace("\\", "/");
+            image = new Image(file.toURI().toString());
+            circle_image.setFill(new ImagePattern(image));
+            circle_hl.setFill(new ImagePattern(image));
+        }
+        changeProfile();
+    }
+
+    public void designInsertImage() {
+        edit_icon.setVisible(false);
+        circle_image.setOnMouseEntered((MouseEvent e) -> {
+            edit_btn.setVisible(true);
+        });
+
+        circle_image.setOnMouseExited((MouseEvent e) -> {
+            edit_btn.setVisible(false);
+        });
+
+        edit_btn.setOnMouseEntered((MouseEvent e) -> {
+            edit_btn.setVisible(true);
+            edit_icon.setVisible(true);
+            edit_icon.setFill(Color.BLACK);
+        });
+
+        edit_btn.setOnMousePressed((MouseEvent e) -> {
+            edit_btn.setVisible(true);
+            edit_icon.setVisible(true);
+            edit_icon.setFill(Color.RED);
+        });
+
+        edit_btn.setOnMouseExited((MouseEvent e) -> {
+            edit_btn.setVisible(false);
+        });
+
+    }
+
+    public void changeProfile() {
+        String sql = "UPDATE admin SET image = ? where account = ?";
+        try (Connection connect = DatabaseLogin.getConnection(); PreparedStatement pstmt = connect.prepareStatement(sql)) {
+            pstmt.setString(1, imagePath);
+            pstmt.setString(2, getData.account);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showProfile() {
+        if (getData.path != null && !getData.path.equals("")) {
+            image = new Image(getData.path);
+            circle_image.setFill(new ImagePattern(image));
+            circle_hl.setFill(new ImagePattern(image));
+        }
+    }
+    @FXML
     private Label user_name;
+
+    public void setUserName(String userName) {
+        user_name.setText(userName);
+    }
 
     @FXML
     private Button home_page;
@@ -204,6 +280,9 @@ public class DashboardController {
 
     @FXML
     private Button logout_btn;
+
+    @FXML
+    private Button edit_btn;
 
     @FXML
     void logout(ActionEvent event) {
@@ -541,6 +620,63 @@ public class DashboardController {
 
     @FXML
     private ImageView availableBook3_image;
+
+    private void displayAvailableBookImages(ObservableList<Book> books, ImageView image1, ImageView image2, ImageView image3) {
+        clearAllImageViews(image1, image2, image3);
+        if (books.isEmpty()) {
+            return;
+        }
+
+        Collections.shuffle(books);
+        int bookToShow = Math.min(books.size(), 3);
+
+        for (int i = 0; i < bookToShow; i++) {
+            String coverImageUrl = books.get(i).getCoverImageUrl();
+            switch(i) {
+                case 0 -> loadImageToImageView(image1, coverImageUrl);
+                case 1 -> loadImageToImageView(image2, coverImageUrl);
+                case 2 -> loadImageToImageView(image3, coverImageUrl);
+            }
+        }
+    }
+
+    private void displayBorrowedBook(ObservableList<IssuedBook> books, ImageView image1, ImageView image2, ImageView image3) {
+        clearAllImageViews(image1, image2, image3);
+        if (books.isEmpty()) {
+            return;
+        }
+        Collections.shuffle(books);
+        int bookToShow = Math.min(books.size(), 3);
+        for (int i = 0; i < bookToShow; i++) {
+            String url = books.get(i).getImage();
+            switch(i) {
+                case 0 -> loadImageToImageView(image1, url);
+                case 1 -> loadImageToImageView(image2, url);
+                case 2 -> loadImageToImageView(image3, url);
+            }
+        }
+    }
+
+
+    private void clearAllImageViews(ImageView image1, ImageView image2, ImageView image3) {
+        image1.setImage(null);
+        image2.setImage(null);
+        image3.setImage(null);
+    }
+
+
+
+    // Hàm tải ảnh vào ImageView
+    private void loadImageToImageView(ImageView imageView, String imageUrl) {
+        try {
+            Image image = new Image(imageUrl, true);
+            imageView.setImage(image);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
     /**
      * manage book.
      */
@@ -591,6 +727,9 @@ public class DashboardController {
 
     @FXML
     private Button add_book_btn_manage;
+
+    @FXML
+    private Button search_book_btn_manage;
 
     private ObservableList<Book> addedBookList = FXCollections.observableArrayList(); /// book_table_manage
 
@@ -718,8 +857,6 @@ public class DashboardController {
             } else {
                 clearFieldsStudent(id_student, name_student, university_faculty, university_student);
             }
-        } else {
-            System.out.println("No student selected to delete!");
         }
     }
 
@@ -750,7 +887,7 @@ public class DashboardController {
             student_table.refresh();
             return;
         }
-        
+
         student_table.setItems(searchResults);
         student_table.refresh();
         clearFieldsStudent(id_student, name_student, university_faculty, university_student);
@@ -761,7 +898,6 @@ public class DashboardController {
     @FXML
     void return_student_table() {
         search_student_btn.getStyleClass().removeAll("search_btn_active");
-        clearFieldsStudent(id_student, name_student, university_faculty, university_student);
         student_table.getSelectionModel().clearSelection();
         search_student.setText(null);
         student_table.setItems(studentList);
@@ -830,8 +966,7 @@ public class DashboardController {
     @FXML
     private Button search_book_btn;
 
-    @FXML
-    private Button return_book_table_btn;
+
 
     @FXML
     public void return_manage_book(ActionEvent event) {
@@ -989,7 +1124,7 @@ public class DashboardController {
             }
         }
 
-        search_book_btn.getStyleClass().add("search_btn_active");
+        search_book_btn_manage.getStyleClass().add("search_btn_active");
         // Nếu không tìm thấy kết quả
         if (searchResults.isEmpty()) {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "No books found matching the search text.");
@@ -1011,8 +1146,7 @@ public class DashboardController {
 
     @FXML
     void resetBookTable() {
-        search_book_btn.getStyleClass().removeAll("search_btn_active");
-        clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
+        search_book_btn_manage.getStyleClass().removeAll("search_btn_active");
         book_table_manage.getSelectionModel().clearSelection();
         search_book_title.setText(null);
         book_table_manage.setItems(addedBookList);
@@ -1150,7 +1284,7 @@ public class DashboardController {
         String status = "Pending";
 
         if (checkSucess == false) {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Toi canh cao elm!");
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Toi canh cao elms!");
             alert.show();
             return;
         }
@@ -1164,12 +1298,13 @@ public class DashboardController {
             }
         }
         String bookName = null;
+        String urlImage = null;
         Book issued_book = null;
         for (int i = 0; i < addedBookList.size(); i++) {
             if (addedBookList.get(i).getId().equals(book_id_record)) {
                 int quantity = addedBookList.get(i).getQuantity();
                 bookName = addedBookList.get(i).getTitle();
-                System.out.println(quantity);
+                urlImage = addedBookList.get(i).getCoverImageUrl();
                 if (quantity == 0) {
                     Alert alert = new Alert(Alert.AlertType.WARNING, "Het sach roi ban eei!");
                     alert.show();
@@ -1180,12 +1315,11 @@ public class DashboardController {
                 addedBookList.set(i, issued_book);
                 db_book.updateBookInDatabase(issued_book);
                 book_table_manage.refresh();
-                System.out.println("sucess");
                 break;
             }
         }
 
-        IssuedBook newBook = new IssuedBook(issue_id_record, student_id_record, bookName , issue_date_record, due_date_record, status);
+        IssuedBook newBook = new IssuedBook(issue_id_record, student_id_record, bookName , issue_date_record, due_date_record, status, urlImage, book_id_record);
         issuedBookList.add(newBook);
         db_issuedBook.saveIssuedBooks(FXCollections.observableArrayList(newBook));
         Alert alert = new Alert(Alert.AlertType.INFORMATION, "Book added to the table successfully!");
@@ -1195,14 +1329,26 @@ public class DashboardController {
         issued_book_table.refresh();
         calculateTotalIssuedBook();
 
-        checkSucess = false;
+        if (borrowedBook1_image.getImage() == null) {
+            Image newImage = new Image(urlImage, true);
+            borrowedBook1_image.setImage(newImage);
+            return;
+        }
+        if (borrowedBook2_image.getImage() == null) {
+            Image newImage = new Image(urlImage, true);
+            borrowedBook2_image.setImage(newImage);
+            return;
+        }
+        if (borrowedBook3_image.getImage() == null) {
+            Image newImage = new Image(urlImage, true);
+            borrowedBook3_image.setImage(newImage);
+        }
     }
-
-
 
     /**
      * view issued book form.
      */
+
     private ObservableList<IssuedBook> issuedBookList = FXCollections.observableArrayList();
     private final DatabaseIssuedBook db_issuedBook = new DatabaseIssuedBook();
     @FXML
@@ -1210,6 +1356,7 @@ public class DashboardController {
 
     @FXML
     private TableView<IssuedBook> issued_book_table;
+
     @FXML
     private TableColumn<IssuedBook, String> col_issuedID;
 
@@ -1228,6 +1375,61 @@ public class DashboardController {
     @FXML
     private TableColumn<IssuedBook, String>  col_status;
 
+    @FXML
+    private Button search_issued_btn;
+
+    @FXML
+    private TextField search_issued_text;
+
+    @FXML
+    void search_issued() {
+        String searchText = search_issued_text.getText();
+
+        // Kiểm tra xem ô tìm kiếm có trống không
+        if (searchText == null || searchText.trim().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Enter text to search!");
+            alert.show();
+            return;
+        }
+        searchText = searchText.trim().toLowerCase();
+
+        // Danh sách kết quả tìm kiếm
+        ObservableList<IssuedBook> searchResults = FXCollections.observableArrayList();
+
+        // Duyệt qua danh sách sách hiện tại để kiểm tra
+        for (IssuedBook book : issuedBookList) {
+            if (book.getIssuedID().toLowerCase().contains(searchText) || book.getStudentID().toLowerCase().contains(searchText) ||
+                book.getBookName().toLowerCase().contains(searchText) || book.getBookID().toLowerCase().contains(searchText) ||
+                book.getIssueDate().toLowerCase().contains(searchText) || book.getDueDate().toLowerCase().contains(searchText)) {
+                searchResults.add(book);
+            }
+        }
+
+        search_issued_btn.getStyleClass().add("search_btn_active");
+        // Nếu không tìm thấy kết quả
+        if (searchResults.isEmpty()) {
+            showAlert(Alert.AlertType.ERROR,"Error", "Invalid.");
+            return;
+        }
+
+        // Hiển thị kết quả tìm kiếm trên bảng
+        issued_book_table.getSelectionModel().clearSelection();
+        issued_book_table.setItems(searchResults);
+        issued_book_table.refresh();
+
+        showAlert(Alert.AlertType.INFORMATION, "Success", "Found!");
+    }
+
+    @FXML
+    void return_issued_table() {
+        search_issued_btn.getStyleClass().removeAll("search_btn_active");
+        issued_book_table.getSelectionModel().clearSelection();
+        search_issued_text.setText(null);
+        issued_book_table.setItems(issuedBookList);
+        issued_book_table.refresh();
+
+    }
+
 
 
     /**
@@ -1236,10 +1438,200 @@ public class DashboardController {
     @FXML
     private AnchorPane return_book_form;
 
-    
+    @FXML
+    private TextField bookCondition_return;
+
+    @FXML
+    private TextField bookId_return;
+
+    @FXML
+    private ImageView bookImage_return;
+
+    @FXML
+    private Label bookNameField;
+
+    @FXML
+    private TextField issueDateField_return;
+
+    @FXML
+    private TextField dueDateField_return;
+
+    @FXML
+    private TextField issueId_return;
+
+    @FXML
+    private TextField penaltyAmt1_return;
+
+    @FXML
+    private TextField penaltyAmt2_return;
+
+    @FXML
+    private TextField penaltyNote1_return;
+
+    @FXML
+    private TextField penaltyNote2_return;
+
+    @FXML
+    private TextField studentId_return;
+
+    @FXML
+    private Button record_return_book_btn;
+
+    @FXML
+    private Button check_available_btn;
+
+    @FXML
+    private DatePicker return_date;
+
+    private Connection connection = db_book.getConnection();
+
+    // Xử lý sự kiện khi nhấn nút 'Check Available'
+    @FXML
+    public void handleCheckAvailable(ActionEvent event) {
+        String issueID = issueId_return.getText().trim();
+
+        if (issueID.isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Please fill all fields!");
+            alert.show();
+            return;
+        }
+
+        try {
+            // Kiểm tra nếu sách đã được mượn
+            PreparedStatement ps = connection.prepareStatement("SELECT issueID, issueDate, dueDate, bookID, studentID, bookName, image FROM issuedbook WHERE issueID = ?");
+            ps.setString(1, issueID);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Nếu có bản ghi, hiển thị thông tin sách
+                String bookID = rs.getString("bookID");
+                bookId_return.setText(rs.getString("bookID"));
+                issueDateField_return.setText(rs.getString("issueDate"));
+                dueDateField_return.setText(rs.getString("dueDate"));
+                studentId_return.setText(rs.getString("studentID"));
+                bookNameField.setText(rs.getString("bookName"));
+                bookImage_return.setImage(new Image(rs.getString("image")));
+
+            } else {
+                clearIssueAvailPane();
+                Alert alert = new Alert(Alert.AlertType.WARNING, "No issue case found!");
+                alert.show();
+            }
+        } catch (SQLException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Something went wrong!");
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void clearIssueAvailPane() {
+        issueId_return.setText("");
+        issueDateField_return.setText("");
+        dueDateField_return.setText("");
+        bookId_return.clear();
+        studentId_return.clear();
+        bookImage_return.setImage(null); // Không hiển thị ảnh
+    }
+
+    //return book
+    @FXML
+    private void recordReturnBook(ActionEvent event) {
+        String issueID = issueId_return.getText();
+        int bookCondition = Integer.parseInt(bookCondition_return.getText());
+        java.sql.Date returnDate = java.sql.Date.valueOf(return_date.getValue());
+
+        try {
+            // Lấy thông tin từ bảng issuedbook
+            String issuedQuery = "SELECT bookID, dueDate FROM issuedbook WHERE issueID = ?";
+            PreparedStatement issuedStmt = connection.prepareStatement(issuedQuery);
+            issuedStmt.setString(1, issueID);
+            ResultSet issuedRs = issuedStmt.executeQuery();
+
+            if (issuedRs.next()) {
+                String bookID = issuedRs.getString("bookID");
+                Date dueDate = issuedRs.getDate("dueDate");
+
+                // Kiểm tra phạt trễ hạn
+                int lateDays = (int) ((returnDate.getTime() - dueDate.getTime()) / (1000 * 60 * 60 * 24));
+                System.out.println("Days late: " + lateDays);
+                int latePenalty = 0;
+                if (lateDays > 0) {
+                    String lateQuery = "SELECT fine FROM returnbooklaterule WHERE ? BETWEEN min_days AND max_days";;
+                    PreparedStatement lateStmt = connection.prepareStatement(lateQuery);
+                    lateStmt.setInt(1, lateDays);
+                    ResultSet lateRs = lateStmt.executeQuery();
+                    if (lateRs.next()) {
+                        latePenalty = lateRs.getInt("fine");
+                        penaltyAmt1_return.setText(latePenalty + "");
+                        penaltyNote1_return.setText("Penalty for late return: " + lateDays);
+                    }
+                }
+
+                // Kiểm tra tổn hại sách
+                int damagePenalty = 0;
+                String action = "";
+                String damageQuery = "SELECT fine, action FROM returnbookdamagerule WHERE ? BETWEEN bookdamagemin AND bookdamagemax";
+                PreparedStatement damageStmt = connection.prepareStatement(damageQuery);
+                damageStmt.setInt(1, bookCondition);
+                ResultSet damageRs = damageStmt.executeQuery();
+                if (damageRs.next()) {
+                    damagePenalty = damageRs.getInt("fine");
+                    action = damageRs.getString("action");
+                    penaltyAmt2_return.setText(damagePenalty + "");
+                    penaltyNote2_return.setText("Penalty for book damage");
+                }
+
+                // Cập nhật số lượng sách trong bảng book
+                if ("Giữ sách".equals(action)) {
+                    String updateBookQuery = "UPDATE book SET quantity = quantity + 1 WHERE id = ?";
+                    PreparedStatement updateBookStmt = connection.prepareStatement(updateBookQuery);
+                    updateBookStmt.setString(1, bookID);
+                    updateBookStmt.executeUpdate();
+                    Book issued_book = null;
+                    for (int i = 0; i < addedBookList.size(); i++) {
+                        if (addedBookList.get(i).getId().equals(bookID)) {
+                            int quantity = addedBookList.get(i).getQuantity();
+                            issued_book = addedBookList.get(i);
+                            issued_book.setQuantity(quantity + 1);
+                            addedBookList.set(i, issued_book);
+                            book_table_manage.refresh();
+                            break;
+                        }
+                    }
 
 
+                    showAlert(Alert.AlertType.INFORMATION, "Success", "Book returned successfully. The book is in acceptable condition.");
+                } else if ("Bỏ sách".equals(action)) {
+                    showAlert(Alert.AlertType.WARNING, "Success", "Book returned successfully. The book is not in acceptable condition.");
+                }
 
+                // Cập nhật issuedbook
+                issuedBookList.removeIf(book -> book.getIssuedID().equals(issueID));
+                issued_book_table.setItems(FXCollections.observableArrayList(issuedBookList));
+                issued_book_table.refresh();
+                calculateTotalIssuedBook();
+
+
+                String updateIssuedQuery = "DELETE FROM issuedbook WHERE issueID = ?";
+                PreparedStatement updateIssuedBook = connection.prepareStatement(updateIssuedQuery);
+                updateIssuedBook.setString(1, issueID);
+                updateIssuedBook.executeUpdate();
+
+            } else {
+                showAlert(Alert.AlertType.ERROR, "Error", "Invalid Issue ID.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Database Error", "An error occurred while processing the return.");
+        }
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String message) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
 
 
     public void connectBook(TableColumn<Book, String> id_col, TableColumn<Book, String> title_col, TableColumn<Book, String> author_col,
@@ -1308,9 +1700,15 @@ public class DashboardController {
         issued_book_table.setItems(issuedBookList);
     }
     List<University> universities = University.getUniversities();
+    HelloController helloController = new HelloController();
     @FXML
     public void initialize() {
         search_student_btn.getStyleClass().removeAll("search_btn_active");
+        search_book_btn_manage.getStyleClass().removeAll("search_book_btn_active");
+        search_book_btn.getStyleClass().removeAll("search_book_btn_active");
+
+        designInsertImage();
+        showProfile();
 
         universities.forEach(u -> university_student.getItems().add(u.getName()));
         university_student.setOnAction(event -> {
@@ -1386,6 +1784,10 @@ public class DashboardController {
         issuedBookList = db_issuedBook.loadIssuedBooks();
         issued_book_table.setItems(issuedBookList);
         calculateTotalIssuedBook();
+
+        //
+        displayAvailableBookImages(addedBookList, availableBook1_image, availableBook2_image, availableBook3_image);
+        displayBorrowedBook(issuedBookList, borrowedBook1_image, borrowedBook2_image, borrowedBook3_image);
     }
 
     @FXML
@@ -1405,9 +1807,6 @@ public class DashboardController {
             alert.show();
             calculateTotalBook();
             clearFields(id_book_manage, title_book_manage, author_book_manage, genre_book_manage, quantity_book_manage, bookCoverImageView_manage);
-
-        } else {
-            System.out.println("No book selected to delete!");
         }
     }
 
@@ -1540,6 +1939,5 @@ public class DashboardController {
     public void onCloseRequest() {
         // Lưu danh sách sách khi đóng chương trình
         db_book.saveBooks(addedBookList);
-        System.out.println("Books saved successfully on close!");
     }
 }
